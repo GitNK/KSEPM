@@ -7,3 +7,4 @@ src/KSEPM.Domain/obj
 src/KSEPM.Common/bin
 src/KSEPM.Common/obj
 *.suo
+*.user
