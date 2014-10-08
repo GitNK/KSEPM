@@ -1,0 +1,11 @@
+﻿@model KSEPM.Web.Models.AccountViewModels.RegisterViewModel
+
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="content-titles-header">
+    Сотрудник @Html.DisplayTextFor(x => x.FirstName) @Html.DisplayTextFor(x => x.SecondName) добавлен успешно
+</h3>
+<h5>Пароль @Html.TextBoxFor(x => x.Password, new { @class = "form-control input-sm", @readonly = "readonly" })</h5>

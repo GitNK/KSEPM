@@ -1,0 +1,110 @@
+﻿@using KSEPM.Resources.Views.Charts
+@{
+    ViewBag.Title = "Tables";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-page-header-title">
+    <h3>@ChartsResource.V_TC_main_title</h3>
+    <p>@ChartsResource.V_TC_main_subtitle</p>
+</div>
+
+
+<div class="row">
+    <div class="col-md-7">
+        <h5 class="table-caption">
+            <i class="fa fa-bars"></i>
+            @ChartsResource.V_TC_sum_detailtable_title
+        </h5>
+        <table class="table table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>@ChartsResource.V_TC_table_td_name</th>
+                    <th>@ChartsResource.V_TC_table_td_city</th>
+                    <th>@ChartsResource.V_TC_table_td_sell_point</th>
+                    <th>@ChartsResource.V_TC_table_td_sell_date</th>
+                    <th>@ChartsResource.V_TC_table_td_ammount</th>
+                    <th>@ChartsResource.V_TC_table_td_points</th>
+                    <th>@ChartsResource.V_TC_table_td_achievement</th>
+                </tr>
+            </thead>
+            <tbody id="employeeDetailedSellsTBody"></tbody>
+        </table>
+    </div>
+
+    <div class="col-md-5">
+        <h5 class="table-caption">
+            <i class="fa fa-flag-checkered"></i>
+            @ChartsResource.V_TC_overall_table_title
+        </h5>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>@ChartsResource.V_TC_table_td_name</th>
+                    <th>@ChartsResource.V_TC_table_td_ammount</th>
+                    <th>@ChartsResource.V_TC_table_td_points</th>
+                </tr>
+            </thead>
+            <tbody id="employeeOverallResultTBody"></tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script id="employeeOverallResultTRTemplate" type="text/x-jsrender">
+        <tr class="{{if isFirst}}success{{else isLast}}danger{{/if}}">
+            <td>{{>Position}}</td>
+            <td>{{>Name}}</td>
+            <td class="{{if isFirst}}success{{else isLast}}{{else}}warning{{/if}}">{{>Ammount}}</td>
+            <td class="{{if isFirst}}success{{else isLast}}{{else}}info{{/if}}">{{>Points}}</td>
+        </tr>
+    </script>
+
+    <script id="employeeDetailedSellsTRTemplate" type="text/x-jsrender">
+        <tr>
+            <td>{{>Position}}</td>
+            <td>{{>Seller.SellerName}}</td>
+            <td>{{>SellPoint.SellPointCity}}</td>
+            <td>{{>SellPoint.SellPointName}}</td>
+            <td>{{>SellDate}}</td>
+            <td class="warning">{{>Ammount}}</td>
+            <td class="info">{{>Points}}</td>
+            <td>{{>Achievements}}</td>
+        </tr>
+    </script>
+    
+    <script type="text/javascript">
+        $(function() {
+            $.ajax({
+                type: 'GET',
+                url: '/Chart/TableInfo/',
+                success: function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        if (i === 0) {
+                            data[i].isFirst = true;
+                        }
+                        if (i === data.length - 1) {
+                            data[i].isLast = true;
+                        }
+                        data[i].Position = i + 1;
+                        $("#employeeOverallResultTBody").append($('#employeeOverallResultTRTemplate').render(data[i]));
+                    }
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: '/Chart/TableDetailedInfo/',
+                success: function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        data[i].SellDate = moment(data[i].SellDate * 1000).format("DD.MM.YYYY");
+                        $("#employeeDetailedSellsTBody").append($('#employeeDetailedSellsTRTemplate').render(data[i]));
+                    }
+                }
+            });
+        });
+    </script>
+}

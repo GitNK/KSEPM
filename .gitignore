@@ -1,0 +1,9 @@
+src/KSEPM.Web/bin
+src/KSEPM.Web/obj
+src/KSEPM.Resources/bin
+src/KSEPM.Resources/obj
+src/KSEPM.Domain/bin
+src/KSEPM.Domain/obj
+src/KSEPM.Common/bin
+src/KSEPM.Common/obj
+*.suo

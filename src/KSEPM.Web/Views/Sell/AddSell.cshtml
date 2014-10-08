@@ -1,0 +1,353 @@
+﻿@using System.Web.Optimization
+@using KSEPM.Resources.DisplayNames
+@using KSEPM.Resources.Errors
+@using KSEPM.Resources.Views.Sells
+@model KSEPM.Web.Models.ChairViewModels.ChairViewModel
+
+@{
+    ViewBag.Title = "AddSell";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-page-header-title">
+    <h3>@SellResource.V_S_main_title</h3>
+    <p>@SellResource.V_S_main_subtitle</p>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="row add-form-margin">
+            @using (Html.BeginForm("AddSell", "Sell", FormMethod.Post, new { @role = "form", @id = "chairForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">@SellResource.V_S_form_seller</label>
+                        <div class="col-md-8" id="sellerNamesDropDownDiv">
+                            <select class="form-control input-sm" id="sellerSelectionDropDownList" name="sellerSelectionDropDownList"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">@SellResource.V_S_form_sell_point</label>
+                        <div class="col-md-8" id="sellPointNamesDropDownDiv">
+                            <select class="form-control input-sm" id="sellPointSelectionDropDownList" name="sellPointSelectionDropDownList"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">@SellResource.V_S_form_sell_time</label>
+                        <div class="col-md-8">
+                            <div class="input-group date datetimepicker">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                <input type='text' class="form-control input-sm" placeholder="@SellResource.V_S_form_selltime_placeholder" name="selldateInput" id="selldateInput" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="chairFirstDiv">
+                        <label class="col-md-3 control-label">@SellResource.V_S_form_chair</label>
+                        <div class="col-md-8" id="chairNamesDropDownDiv">
+                            <select class="form-control input-sm" id="chairSelectionDropDownList" name="chairSelectionDropDownList"></select>
+                        </div>
+                    </div>
+                    <div id="optionList"></div>
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-8">
+                            <button type="submit" class="btn btn-success btn-block" id="selectChairButton">@SellResource.V_S_form_submit_btn</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-7" style="margin-left: -20px">
+        <h5 class="table-caption-unbordered">
+            <i class="fa fa-bars"></i>
+            @SellResource.V_S_addedchairs_table_title
+        </h5>
+        <table class="table table-condensed table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>@SellResource.V_S_table_td_name</th>
+                    <th class="text-center">@SellResource.V_S_table_td_sell_point</th>
+                    <th class="text-center">@SellResource.V_S_table_td_chair</th>
+                    <th class="text-center">@SellResource.V_S_table_td_options</th>
+                    <th class="text-center">@SellResource.V_S_table_td_ammount</th>
+                    <th class="text-center">@SellResource.V_S_table_td_edit_btn</th>
+                    <th class="text-center">@SellResource.V_S_table_td_delete_btn</th>
+                </tr>
+            </thead>
+            <tbody id="chairTodaySellsDetailedTBody"></tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{  
+    <script type="text/javascript">
+        $(function() {
+            $.ajax({
+                type: 'GET',
+                url: '/Sell/TodaySells',
+                success: function(data) {
+                    $('#chairTodaySellsDetailedTBody').append($('#selledChairDetailsTemplate').render(data));
+
+                    $('.deleteChairSell').on('click', function() {
+                        DeleteChairSell($(this).closest('tr'), $(this).data('sellid'));
+                    });
+                }
+            });
+
+
+            $("#chairSelectionDropDownList").change(function() {
+                $.ajax({
+                    type: "GET",
+                    url: '/Sell/ChairDetails/',
+                    data: { chairId: $(this).val() },
+                    error: function() {
+                        alert("error");
+                    },
+                    success: function(data) {
+
+                        var optionListDiv = $("#optionList");
+                        optionListDiv.empty();
+                        optionListDiv.append($('#optionDropDownListTemplate').render(data.ChairOptionGroups));
+                        //for future
+                        $('.dropdownlistselector').on('change', function() {
+
+                        });
+                    }
+                });
+            });
+
+            $("#chairForm").validate({
+                onfocusout: false,
+
+                rules: {
+                    sellerSelectionDropDownList: {
+                        defaultOptionSelect: true
+                    },
+                    sellPointSelectionDropDownList: {
+                        defaultOptionSelect: true
+                    },
+                    chairSelectionDropDownList: {
+                        defaultOptionSelect: true
+                    },
+                    selldateInput: {
+                        required: true,
+                        date: true
+                    }
+                },
+                messages: {
+                    sellerSelectionDropDownList: {
+                        defaultOptionSelect: '@ErrorMessage.ERR_addsellform_empty_sellerselect'
+                    },
+                    sellPointSelectionDropDownList: {
+                        defaultOptionSelect: '@ErrorMessage.ERR_addsellform_empty_sellpointselect'
+                    },
+                    chairSelectionDropDownList: {
+                        defaultOptionSelect: '@ErrorMessage.ERR_addsellform_empty_chairselect'
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr('name') == 'selldateInput') {
+                        error.appendTo(element.parent('div').parent('div')).addClass('validation-span-error field-validation-error font-style-normal-important');
+                    } else {
+                        error.appendTo(element.parent('div')).addClass('validation-span-error field-validation-error font-style-normal-important');
+                    }
+                },
+                submitHandler: function(form) {
+                    var array = [];
+                    $('.dropdownlistselector').each(function() {
+                        var el = $(this).val() || [];
+                        for (var i = 0; i < el.length; i++) {
+                            array.push(el[i]);
+                        }
+                    });
+
+                    var date = $('.datetimepicker').data("DateTimePicker").getDate();
+
+                    var chairSell = {
+                        Seller: {
+                            SellerID: $("#sellerSelectionDropDownList").val(),
+                            SellerName: $("#sellerSelectionDropDownList option:selected").text()
+                        },
+                        Sellpoint: {
+                            SellPointID: $("#sellPointSelectionDropDownList").val(),
+                            SellPointName: $("#sellPointSelectionDropDownList option:selected").text()
+                        },
+                        Chair: {
+                            ChairID: $('#chairSelectionDropDownList').val()
+                        },
+                        SellDate: moment(date).valueOf() / 1000,
+                        ChairOptionIDs: array
+                    };
+
+                    var token = $('[name=__RequestVerificationToken]').val();
+                    var headers = {};
+                    headers["__RequestVerificationToken"] = token;
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Sell/AddSell/',
+                        headers: headers,
+                        data: { 'chairSell': chairSell },
+                        success: function(data) {
+                            $('#chairTodaySellsDetailedTBody').append($('#selledChairDetailsTemplate').render(data));
+
+                            $('.deleteChairSell').on('click', function() {
+                                DeleteChairSell($(this).closest('tr'), $(this).data('sellid'));
+                            });
+                        },
+                        error: function(data) {
+                            alert('error');
+                        }
+                    });
+                }
+            });
+
+            function DeleteChairSell(row, sellID) {
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/Sell/DeleteSell/',
+                    data: { 'sellID': sellID },
+                    success: function(data) {
+                        row.remove();
+                    },
+                    error: function(data) {
+                        alert('error');
+                    }
+                });
+            };
+
+            $.ajax({
+                type: 'GET',
+                url: '/Sell/ChairNames/',
+                success: function(data) {
+
+                    var chairDropDownlist = $("#chairSelectionDropDownList");
+
+                    chairDropDownlist.append($("<option>", {
+                        value: '',
+                        text: '@SellResource.V_S_form_chair_placeholder',
+                        selected: true
+                    }).addClass('placeholder'));
+
+                    chairDropDownlist.append($('#chairDropDownListTemplate').render(data));
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: '/Sell/SellerNames/',
+                success: function(data) {
+
+                    var sellerDropDownList = "#sellerSelectionDropDownList";
+
+                    for (var i = 0; i < data.length; i++) {
+                        $(sellerDropDownList).append($("<option>",
+                        {
+                            value: data[i].SellerID,
+                            text: data[i].SellerName
+                        }));
+                    }
+
+                    if ($("#sellerSelectionDropDownList option").size() == 0) {
+                        $(sellerDropDownList).append($("<option>", {
+                            value: '',
+                            text: '@SellResource.V_S_form_seller_emptylist_placeholder',
+                            selected: true
+                        }).addClass('placeholder'));
+                    } else {
+                        $(sellerDropDownList).append($("<option>", {
+                            value: '',
+                            text: '@SellResource.V_S_form_seller_placeholder',
+                            selected: true
+                        }).addClass('placeholder'));
+                    }
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: '/Sell/SellPointNames/',
+                success: function(data) {
+
+                    var sellPointDropDownList = $("#sellPointSelectionDropDownList");
+
+                    sellPointDropDownList.append($("<option>", {
+                        value: '',
+                        text: '@SellResource.V_S_form_sellpoint_placeholder',
+                        selected: true
+                    }).addClass('placeholder'));
+
+                    for (var i = 0; i < data.length; i++) {
+                        sellPointDropDownList.append($("<option>",
+                        {
+                            value: data[i].SellPointID,
+                            text: data[i].SellPointName
+                        }));
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script id="optionDropDownListTemplate" type="text/x-jsrender">
+        {{for #data}}
+        <div class="form-group">
+            <label class="col-md-3 control-label">{{>ChairTypeName}}</label>
+            <div class="col-md-8 dropdown-div-selector">
+                <select class="form-control input-sm dropdownlistselector" name={{>
+                    ChairTypeName}}
+                    {{if IsMultipleSelect}}multiple  size = {^{:ChairOptionNames.length}}{{/if}}>
+                    {{for ChairOptionNames}}
+                    <option value={{>ChairOptionID}} {{if IsBasic}}selected{{/if}}>{{>ChairOptionName}}</option>
+                    {{/for}}
+                </select>
+            </div>
+        </div>
+        {{/for}}
+    </script>
+
+    <script id="chairDropDownListTemplate" type="text/x-jsrender">
+        {{for #data}}
+        <optgroup label={{>
+            ChairLineName}}>
+            {{for Chairs}}
+            <option value={{>ChairID}}>{{>ChairName}}</option>
+            {{/for}}
+        </optgroup>
+        {{/for}}
+    </script>
+
+    <script id="selledChairDetailsTemplate" type="text/x-jsrender">
+        {{for #data}}
+        <tr>
+            <td class="warning">{{>Seller.SellerName}}</td>
+            <td class="text-center">{{>SellPoint.SellPointName}}</td>
+            <td class="text-center">{{>Chair.ChairName}}</td>
+            <td class="text-center">not implemented</td>
+            <td class="info text-center">{{>Ammount}}</td>
+            <td class="text-center"><button class="label label-warning editChairSell" data-sellid="{{>SellID}}">@SellResource.V_S_edit_btn</button></td>
+            <td class="text-center"><button class="label label-danger deleteChairSell" data-sellid="{{>SellID}}">@SellResource.V_S_delete_btn</button></td>
+        </tr>
+        {{/for}}
+    </script>
+    
+    @*validation rules*@
+    <script type="text/javascript">
+        $(function() {
+
+            jQuery.validator.addMethod('defaultOptionSelect', function(value, element) {
+                return element.value == '' ? false : true;
+            });
+
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

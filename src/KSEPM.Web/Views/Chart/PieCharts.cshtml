@@ -1,0 +1,17 @@
+﻿@using System.Web.Optimization
+@using KSEPM.Resources.Views.Charts
+
+@{
+    ViewBag.Title = "PieCharts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-page-header-title">
+    <h3>@ChartsResource.V_PC_main_title</h3>
+    <p>@ChartsResource.V_PC_main_subtitle</p>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/highcharts")
+}

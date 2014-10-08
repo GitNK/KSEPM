@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DN_email" xml:space="preserve">
+    <value>Mail</value>
+    <comment>Common display name</comment>
+  </data>
+  <data name="DN_password" xml:space="preserve">
+    <value>Password</value>
+    <comment>Common display name</comment>
+  </data>
+  <data name="DN_role" xml:space="preserve">
+    <value>Access</value>
+    <comment>Common display name</comment>
+  </data>
+  <data name="DN_RVM_firstname" xml:space="preserve">
+    <value>First Name</value>
+    <comment>RegisterViewModel display name</comment>
+  </data>
+  <data name="DN_RVM_secondname" xml:space="preserve">
+    <value>Second Name</value>
+    <comment>RegisterViewModel display name</comment>
+  </data>
+  <data name="DN_RVM_starttowork" xml:space="preserve">
+    <value>Enrolled</value>
+    <comment>RegisterViewModel display name</comment>
+  </data>
+  <data name="DN_RVM_description" xml:space="preserve">
+    <value>Description</value>
+    <comment>RegisterViewModel display name</comment>
+  </data>
+  <data name="DN_CVM_Cross" xml:space="preserve">
+    <value>Cross</value>
+  </data>
+  <data name="DN_CVM_Cross_chrome_coated" xml:space="preserve">
+    <value>Chrome coated</value>
+  </data>
+  <data name="DN_CVM_Cross_polyamide" xml:space="preserve">
+    <value>Polyamide</value>
+  </data>
+  <data name="DN_CVM_Cross_wooden" xml:space="preserve">
+    <value>Wooden</value>
+  </data>
+  <data name="DN_CVM_HeadRest" xml:space="preserve">
+    <value>Headrest</value>
+  </data>
+  <data name="DN_CVM_Headrest_angle" xml:space="preserve">
+    <value>Headrest angle</value>
+  </data>
+  <data name="DN_CVM_Headrest_angle_height" xml:space="preserve">
+    <value>Headrest angle and height</value>
+  </data>
+  <data name="DN_CVM_Mechanism" xml:space="preserve">
+    <value>Mechanism</value>
+  </data>
+  <data name="DN_CVM_Mechanism_basic" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+  <data name="DN_CVM_Mechanism_ring_base" xml:space="preserve">
+    <value>Ring base</value>
+  </data>
+  <data name="DN_CVM_Mechanism_slander" xml:space="preserve">
+    <value>Slander, Horizontal seat</value>
+  </data>
+  <data name="DN_CVM_Mechanism_stop_support" xml:space="preserve">
+    <value>Stop-support</value>
+  </data>
+  <data name="DN_CVM_Onvay" xml:space="preserve">
+    <value>Onvay</value>
+  </data>
+  <data name="DN_CVM_Onvay_logo" xml:space="preserve">
+    <value>Application of logos</value>
+  </data>
+  <data name="DN_CVM_Onvay_stitch_aristo" xml:space="preserve">
+    <value>Designer stitch - aristo</value>
+  </data>
+  <data name="DN_CVM_Onvay_stitch_design" xml:space="preserve">
+    <value>Designer stitch - design</value>
+  </data>
+  <data name="DN_CVM_Onvay_stitch_fashion" xml:space="preserve">
+    <value>Designer stitch - fashion</value>
+  </data>
+  <data name="DN_CVM_Onvay_stitch_quatro" xml:space="preserve">
+    <value>Designer stitch - quatro</value>
+  </data>
+  <data name="DN_CVM_Onvay_stitch_zeta" xml:space="preserve">
+    <value>Designer stitch - zeta</value>
+  </data>
+  <data name="DN_CVM_Onvay_swarovski" xml:space="preserve">
+    <value>Swarovski</value>
+  </data>
+  <data name="DN_CVM_Upholstery" xml:space="preserve">
+    <value>Upholstery</value>
+  </data>
+  <data name="DN_CVM_Upholstery_eco_leather" xml:space="preserve">
+    <value>Ecoleather/Antara</value>
+  </data>
+  <data name="DN_CVM_Upholstery_leather" xml:space="preserve">
+    <value>Leather</value>
+  </data>
+  <data name="DN_CVM_Upholstery_perforated_eco_leather" xml:space="preserve">
+    <value>Perforated ecoleather</value>
+  </data>
+  <data name="DN_CVM_Arax" xml:space="preserve">
+    <value>Arax</value>
+  </data>
+  <data name="DN_CVM_Darinok" xml:space="preserve">
+    <value>Darinok</value>
+  </data>
+  <data name="DN_CVM_Dom_Mebeli" xml:space="preserve">
+    <value>Furniture House</value>
+  </data>
+  <data name="DN_CVM_Dream_Town" xml:space="preserve">
+    <value>Dream town</value>
+  </data>
+  <data name="DN_CVM_Forum" xml:space="preserve">
+    <value>Forum</value>
+  </data>
+  <data name="DN_CVM_Six_element" xml:space="preserve">
+    <value>Six element</value>
+  </data>
+  <data name="DN_CVM_Three_slona" xml:space="preserve">
+    <value>Three elephants</value>
+  </data>
+  <data name="DN_CVM_Vash_dom" xml:space="preserve">
+    <value>Your house</value>
+  </data>
+  <data name="DN_RVM_Office" xml:space="preserve">
+    <value>Office</value>
+  </data>
+  <data name="DN_RVM_Outside" xml:space="preserve">
+    <value>Outside</value>
+  </data>
+  <data name="DN_RVM_pointtype" xml:space="preserve">
+    <value>Sell type</value>
+    <comment>RegisterViewModel display name</comment>
+  </data>
+  <data name="DN_SDTVM_Kiev" xml:space="preserve">
+    <value>Kiev</value>
+  </data>
+  <data name="DN_SDTVM_Lvov" xml:space="preserve">
+    <value>Lvov</value>
+  </data>
+  <data name="DN_SDTVM_Odessa" xml:space="preserve">
+    <value>Odessa</value>
+  </data>
+  <data name="DN_SDTVM_Kharkiv" xml:space="preserve">
+    <value>Kharkiv</value>
+  </data>
+</root>

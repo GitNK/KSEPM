@@ -1,0 +1,165 @@
+﻿@using System.Web.Optimization
+@using KSEPM.Resources.Views.Shared
+@using KSEPM.Web.Database.Identity
+@using KSEPM.Web.Infrastructure.Identity
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kulik System Employees Performance Monitor</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <header id="top-nav-bar" class="navbar navbar-default">
+        <div class="navbar-header">
+            <a class="navbar-brand top-nav-bar-bottommargin top-nav-bar-leftmargin" href="#">
+                <img id="main-logo" src="../../Images/logo.png" />
+                <span class="top-nav-bar-leftmargin text-main-logo">Kulik System Employee Performance Monitor</span>
+            </a>
+        </div>
+        <ul class="nav navbar-nav pull-right top-nav-bar-topmargin" id="top-nav-body">
+            <li>
+                <div style="margin-top: 10px">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle btn-primary" type="button" id="languageDropDown" data-toggle="dropdown">
+                            @MainLayout.V_language
+                            <span class="fa fa-caret-down" style="margin-left: 5px;"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="languageDropDown">
+                            <li role="presentation" class="dropdown-header">@MainLayout.V_language_choosetitle</li>
+                            <li>
+                                @Html.ActionLink("English", "Localization", "Home", new { cultureValue = "en", url = Request.Url }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Русский", "Localization", "Home", new { cultureValue = "ru", url = Request.Url }, null)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="margin-top: 10px; margin-left: 10px;">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle btn-success" type="button" id="languageDropDown" data-toggle="dropdown">
+                            <span class="fa fa-cogs"></span>
+                            <span class="fa fa-caret-down" style="margin-left: 5px;"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="settingsDropDown">
+                            <li role="presentation" class="dropdown-header">@MainLayout.V_settingsdropdown_accountsettings_title</li>
+                            <li role="presentation">
+                                @Html.ActionLink(MainLayout.V_settingsdropdown_changepass_link, "ChangePassword", "ManageAccount", new { url = Request.Url }, null)
+                            </li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation" class="dropdown-header">@MainLayout.V_settingsdropdown_anothersettings_title</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="navbar-text" id="top-nav-bar-name">
+                    <i class="fa fa-user fa-2x"></i>
+                    <ul>
+                        <li><small>@MainLayout.V_greetings,</small></li>
+                        <li>@User.FirstName()</li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a role="button" href="@Url.Action("Logout", "Login")">
+                    <i class="fa fa-sign-out fa-2x"></i>
+                </a>
+            </li>
+        </ul>
+    </header>
+
+    <div id="sidebar-nav">
+        <ul id="dashboard-menu">
+            <li>
+                <a href="@Url.Action("Index", "Home")">
+                    <i class="fa fa-home fa-2x"></i>
+                    <span>@MainLayout.V_menu_home</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Tables", "Chart")">
+                    <i class="fa fa-tasks fa-2x"></i>
+                    <span>@MainLayout.V_menu_tables</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("LinearCharts", "Chart")">
+                    <i class="fa fa-area-chart fa-2x"></i>
+                    <span>@MainLayout.V_menu_linear_charts</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("PieCharts", "Chart")">
+                    <i class="fa fa-pie-chart fa-2x"></i>
+                    <span>@MainLayout.V_menu_pie_charts</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Employees", "Account")">
+                    <i class="fa fa-users fa-2x"></i>
+                    <span>@MainLayout.V_menu_employees</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Future", "Home")">
+                    <i class="fa fa-cubes fa-2x"></i>
+                    <span>@MainLayout.V_menu_plans</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("About", "Home")">
+                    <i class="fa fa-globe fa-2x"></i>
+                    <span>@MainLayout.V_menu_about</span>
+                </a>
+            </li>
+            @if (User.IsInRole(AccessIdentityRole.SubAdmin))
+            {
+                <li>
+                    <a href="@Url.Action("Register", "Account")">
+                        <i class="fa fa-graduation-cap fa-2x"></i>
+                        <span>@MainLayout.V_menu_add_user</span>
+                    </a>
+                </li>
+            }
+            @if (User.IsInRole(AccessIdentityRole.Accountant))
+            {
+                <li>
+                    <a href="@Url.Action("AddSell", "Sell")">
+                        <i class="fa fa-database fa-2x"></i>
+                        <span>@MainLayout.V_menu_add_sell</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div class="content">
+        <div id="pad-wrapper">
+            @RenderBody()
+        </div>
+        <hr />
+
+    </div>
+
+    <footer id="bottom-nav-bar" class="nav navbar-fixed-bottom">
+        <p>&copy; Valentina Kostritskaya</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/jsrender")
+    @Scripts.Render("~/bundles/sitetheme");
+    @Scripts.Render("~/bundles/dateformat");
+    @RenderSection("scripts", required: false)
+</body>
+</html>

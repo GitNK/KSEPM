@@ -1,0 +1,55 @@
+﻿@using KSEPM.Resources.Views.Home
+@model KSEPM.Web.Models.AccountViewModels.LoginViewModel
+
+@{
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+<div class="row">
+    <h1 class="col-md-12 text-center main-login-title">Kulik System Employee Performance Monitor</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div id="error-login-form">
+                @Html.ValidationSummary(true)
+            </div>
+            <div id="login-wrapper">
+                <legend>@HomeResource.V_HA_title_autorization</legend>
+                <div class="form-group">
+                    <label for="Email" class=" control-label">@HomeResource.V_HA_email</label>
+                    <div class="login-input-div">
+                        @Html.TextBoxFor(x => x.Email, new
+                            {
+                                @class = "form-control input-sm",
+                                @placeholder = HomeResource.V_HA_email
+                            })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Password" class="control-label">@HomeResource.V_HA_password</label>
+                    <div class="login-input-div">
+                        @Html.PasswordFor(x => x.Password, new
+                            {
+                                @class = "form-control input-sm",
+                                @placeholder = HomeResource.V_HA_password
+                            })
+                    </div>
+                </div>
+                <div class="form-group bottom-div">
+                    <div class="checkbox">
+                        <label class="rememberDiv">
+                            @Html.CheckBoxFor(x => x.RememberMe)
+                            @HomeResource.V_HA_remember
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="login-input-div">
+                        <button type="submit" class="btn btn-info btn-block">@HomeResource.V_HA_login_btn</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

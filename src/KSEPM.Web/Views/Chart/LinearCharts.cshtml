@@ -1,0 +1,78 @@
+﻿@using System.Web.Optimization
+@using KSEPM.Resources.Views.Charts
+
+@{
+    ViewBag.Title = "LinearCharts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-page-header-title">
+    <h3>@ChartsResource.V_LC_main_title</h3>
+    <p>@ChartsResource.V_LC_main_subtitle</p>
+</div>
+
+<div class="row">
+    <div id="linearContainer" style="width:100%; height:400px;">
+
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/highcharts")
+    <script type="text/javascript">
+        $(function () {
+
+            $.ajax({
+                type: 'GET',
+                url: '/Chart/LastWeekSells/',
+                success: function (data) {
+
+                    var dataCategories = [];
+                    var employeeSellData = [];
+                    
+                    var days = data.Days;
+                    var employeeData = data.EmployeeSellDatas;
+                    for (var i = 0; i < days.length; i++) {
+                        dataCategories.push(moment(days[i]).format("DD.MM.YYYY"));
+                    }
+
+                    for (var j = 0; j < employeeData.length; j++) {
+                        employeeSellData.push(
+                        {
+                            name: employeeData[j].EmployeeName,
+                            data: employeeData[j].AmmountByDays
+                        });
+                    }
+
+
+                    $('#linearContainer').highcharts({
+                        title: {
+                            text: 'Last 7 days sells',
+                            x: -20 //center
+                        },
+                        xAxis: {
+                            categories: dataCategories.reverse()
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Ammount (hrivnas)'
+                            }
+
+                        },
+                        tooltip: {
+                            valueSuffix: ' hrn'
+                        },
+                        legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle',
+                            borderWidth: 1
+                        },
+                        series: employeeSellData
+                    });
+                }
+            });
+        });
+    </script>
+}
