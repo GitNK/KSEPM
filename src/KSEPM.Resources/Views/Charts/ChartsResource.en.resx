@@ -136,7 +136,13 @@
     <value>Main basic tables</value>
   </data>
   <data name="V_TC_overall_table_title" xml:space="preserve">
-    <value>Overall efficiency rank</value>
+    <value>Sellers rank</value>
+  </data>
+  <data name="V_TC_sellpointranks_table_chairlist" xml:space="preserve">
+    <value>Chair list</value>
+  </data>
+  <data name="V_TC_sellpointranks_table_pointname" xml:space="preserve">
+    <value>Sell point</value>
   </data>
   <data name="V_TC_sum_detailtable_title" xml:space="preserve">
     <value>Summarized detailed table</value>
@@ -146,6 +152,9 @@
   </data>
   <data name="V_TC_table_td_ammount" xml:space="preserve">
     <value>Ammount</value>
+  </data>
+  <data name="V_TC_table_td_chaircount" xml:space="preserve">
+    <value>Chair count</value>
   </data>
   <data name="V_TC_table_td_city" xml:space="preserve">
     <value>City</value>

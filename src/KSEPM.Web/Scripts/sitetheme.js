@@ -5,7 +5,7 @@
         pickTime: false
     });
     if (datetimePickerDiv.data("DateTimePicker")) {
+        datetimePickerDiv.data("DateTimePicker").setDate(moment());
         datetimePickerDiv.data("DateTimePicker").setMaxDate(new Date());
-        datetimePickerDiv.data("DateTimePicker").setDate(new Date());
     }
 });

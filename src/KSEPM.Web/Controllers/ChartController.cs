@@ -12,6 +12,8 @@ using KSEPM.Web.Infrastructure.Identity;
 using KSEPM.Web.Models;
 using KSEPM.Web.Models.ChairViewModels;
 using KSEPM.Web.Models.ChartViewModels;
+using KSEPM.Web.Models.ChartViewModels.LinearViewModels;
+using KSEPM.Web.Models.ChartViewModels.TablesViewModels;
 
 namespace KSEPM.Web.Controllers
 {
@@ -39,20 +41,20 @@ namespace KSEPM.Web.Controllers
             var employees = GetUsersByRole(AccessIdentityRole.Employee).ToList();
 
             var employeesResults = new List<EmployeeResultViewModel>();
-            int i = 1;
-            foreach (var employee in employees)
+            for(int i = 0; i < employees.Count; i++)
             {
-                var ammount = employee.Sells.Sum(x => x.Amount);
-                var points = employee.Sells.Sum(x => x.Points);
+                var ammount = employees[i].Sells.Sum(x => x.Amount);
+                var points = employees[i].Sells.Sum(x => x.Points);
+                var selledChairsCount = employees[i].Sells.Count;
 
                 employeesResults.Add(new EmployeeResultViewModel
                 {
                     Position = i,
-                    Name = string.Format("{0} {1}", employee.FirstName, employee.SecondName),
+                    Name = string.Format("{0} {1}", employees[i].FirstName, employees[i].SecondName),
+                    ChairCount = selledChairsCount,
                     Ammount = ammount,
                     Points = Math.Round(points, 2)
                 });
-                i++;
             }
 
             return Json(employeesResults.OrderByDescending(x => x.Points), JsonRequestBehavior.AllowGet);
@@ -64,7 +66,6 @@ namespace KSEPM.Web.Controllers
         {
             var sells = _repository.Sells.Get().OrderByDescending(x => x.SellDate).ToList();
 
-            //var sellDetails = new List<SellDetailTableViewModel>();
             var sellDetails = new List<SellViewModel>();
             for (int i = 0; i < sells.Count; i++)
             {
@@ -80,7 +81,7 @@ namespace KSEPM.Web.Controllers
                     {
                         SellPointID = sells[i].SellPoint.ID,
                         SellPointName = GetLocalizatedString(sells[i].SellPoint.PointName),
-                        SellPointCity = sells[i].SellPoint.City
+                        SellPointCity = GetLocalizatedString("DN_SDTVM_", sells[i].SellPoint.City)
                     },
                     SellDate = DateTimeHelper.DateTimeToUnixTimestamp(sells[i].SellDate),
                     Ammount = sells[i].Amount,
@@ -88,8 +89,34 @@ namespace KSEPM.Web.Controllers
                     Achievements = "BRO!"
                 });
             }
-
             return Json(sellDetails, JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("SellPointRanking")]
+        [HttpGet]
+        public JsonResult GetSellPointRanking()
+        {
+            var sellPointRankList = new List<SellPointRankViewModel>();
+
+
+            //Должно выглядеть все примерно так, если расскомитишь и запустишь, то увидишь на таблицах информацию
+            //тут показана одна точка Аракс. Тебе надо их много. Используй _repository , это доступ к базе. Посмотри 
+            //выше в примерах
+            /*
+            sellPointRankList.Add(new SellPointRankViewModel
+            {
+                SellPointName = "Arax",
+                SelledChairCount = 20,
+                SelledChairList = new List<string>
+                {
+                    String.Format("x{0} {1}", 10, "Diamond"),
+                    String.Format("x{0} {1}", 5, "Monarch")
+                },
+                Ammount = 1000,
+                Points = 1000
+            });*/
+
+            return Json(sellPointRankList, JsonRequestBehavior.AllowGet);
         }
 
         [Route("LinearCharts")]
@@ -97,21 +124,6 @@ namespace KSEPM.Web.Controllers
         public ActionResult LinearCharts()
         {
             return View();
-        }
-
-
-        public class LinearChartData
-        {
-            public IEnumerable<DateTime> Days { get; set; }
-            public IEnumerable<EmployeeSellData> EmployeeSellDatas { get; set; }
-        }
-
-        public class EmployeeSellData
-        {
-            public string EmployeeID { get; set; }
-            public string EmployeeName { get; set; }
-
-            public IEnumerable<double> AmmountByDays { get; set; }
         }
 
         [Route("LastWeekSells")]

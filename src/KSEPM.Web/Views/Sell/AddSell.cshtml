@@ -73,7 +73,6 @@
                     <th class="text-center">@SellResource.V_S_table_td_chair</th>
                     <th class="text-center">@SellResource.V_S_table_td_options</th>
                     <th class="text-center">@SellResource.V_S_table_td_ammount</th>
-                    <th class="text-center">@SellResource.V_S_table_td_edit_btn</th>
                     <th class="text-center">@SellResource.V_S_table_td_delete_btn</th>
                 </tr>
             </thead>
@@ -167,6 +166,8 @@
 
                     var date = $('.datetimepicker').data("DateTimePicker").getDate();
 
+                    var momentDate = moment(date).valueOf();
+
                     var chairSell = {
                         Seller: {
                             SellerID: $("#sellerSelectionDropDownList").val(),
@@ -179,7 +180,7 @@
                         Chair: {
                             ChairID: $('#chairSelectionDropDownList').val()
                         },
-                        SellDate: moment(date).valueOf() / 1000,
+                        SellDate: momentDate / 1000,
                         ChairOptionIDs: array
                     };
 
@@ -330,7 +331,6 @@
             <td class="text-center">{{>Chair.ChairName}}</td>
             <td class="text-center">not implemented</td>
             <td class="info text-center">{{>Ammount}}</td>
-            <td class="text-center"><button class="label label-warning editChairSell" data-sellid="{{>SellID}}">@SellResource.V_S_edit_btn</button></td>
             <td class="text-center"><button class="label label-danger deleteChairSell" data-sellid="{{>SellID}}">@SellResource.V_S_delete_btn</button></td>
         </tr>
         {{/for}}

@@ -136,7 +136,13 @@
     <value>Базовые таблицы эффективности</value>
   </data>
   <data name="V_TC_overall_table_title" xml:space="preserve">
-    <value>Общий зачет эффективности</value>
+    <value>Рейтинг продавцов</value>
+  </data>
+  <data name="V_TC_sellpointranks_table_chairlist" xml:space="preserve">
+    <value>Список кресел</value>
+  </data>
+  <data name="V_TC_sellpointranks_table_pointname" xml:space="preserve">
+    <value>Точка</value>
   </data>
   <data name="V_TC_sum_detailtable_title" xml:space="preserve">
     <value>Сводная детальная таблица</value>
@@ -146,6 +152,9 @@
   </data>
   <data name="V_TC_table_td_ammount" xml:space="preserve">
     <value>Сумма</value>
+  </data>
+  <data name="V_TC_table_td_chaircount" xml:space="preserve">
+    <value>Кол-во прод. кресел</value>
   </data>
   <data name="V_TC_table_td_city" xml:space="preserve">
     <value>Город</value>

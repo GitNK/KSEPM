@@ -317,6 +317,8 @@
     <Compile Include="Models\ChairViewModels\SellViewModel.cs" />
     <Compile Include="Models\ChairViewModels\ChairViewModel.cs" />
     <Compile Include="Models\ChartViewModels\EmployeeResultViewModel.cs" />
+    <Compile Include="Models\ChartViewModels\LinearViewModels\LinearChartData.cs" />
+    <Compile Include="Models\ChartViewModels\TablesViewModels\SellPointRankViewModel.cs" />
     <Compile Include="Models\ManageAccountViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="Models\Misc\LocalizationViewModel.cs" />
     <Compile Include="Models\SellerViewModel.cs" />
