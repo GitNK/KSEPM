@@ -16,7 +16,7 @@ namespace KSEPM.Web.Database
         private static ApplicationUserManager _userManager;
         private static ApplicationRoleManager _roleManager;
         private const string AdminName = "borisermakof@gmail.com";
-        private const string AdminPass = "Aaa111";
+        private const string AdminPass = "Qwerty1111";
         private const string FirstName = "Борис";
         private const string SecondName = "Ермаков";
 
