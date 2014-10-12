@@ -144,6 +144,9 @@
   <data name="V_menu_linear_charts" xml:space="preserve">
     <value>Линейные графики</value>
   </data>
+  <data name="V_menu_olympus" xml:space="preserve">
+    <value>Олимп</value>
+  </data>
   <data name="V_menu_pie_charts" xml:space="preserve">
     <value>Круговые графики</value>
   </data>

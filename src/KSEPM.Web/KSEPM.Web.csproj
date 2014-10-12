@@ -160,6 +160,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-table.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -205,6 +206,7 @@
     <Content Include="Images\Menu\settings_selected.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-table.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\dateformat.js" />
@@ -243,6 +245,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BaseControllers\ManagerBaseController.cs" />
     <Compile Include="Controllers\ManageAccountController.cs" />
+    <Compile Include="Controllers\OlympusController.cs" />
     <Compile Include="Controllers\SellController.cs" />
     <Compile Include="Database\ChairDbInitializer.cs" />
     <Compile Include="Database\Entities\Chair.cs" />
@@ -264,6 +267,8 @@
     <Compile Include="Database\Repositories\BaseRepository.cs" />
     <Compile Include="Database\Repositories\SellPointRepository.cs" />
     <Compile Include="Database\Repositories\SellRepository.cs" />
+    <Compile Include="DataProcessing\DataAggregator.cs" />
+    <Compile Include="DataProcessing\Interfaces\IDataAggregator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -312,6 +317,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels\LoginViewModel.cs" />
     <Compile Include="Models\AccountViewModels\RegisterViewModel.cs" />
+    <Compile Include="Models\BaseViewModels\BaseViewModel.cs" />
+    <Compile Include="Models\BaseViewModels\NameBaseViewModel.cs" />
     <Compile Include="Models\BaseViewModels\LocalizatedViewModel.cs" />
     <Compile Include="Models\ChairOptionViewModel.cs" />
     <Compile Include="Models\ChairViewModels\SellViewModel.cs" />
@@ -343,6 +350,7 @@
     <Content Include="Views\Chart\PieCharts.cshtml" />
     <Content Include="Views\Account\Employees.cshtml" />
     <Content Include="Views\ManageAccount\ChangePassword.cshtml" />
+    <Content Include="Views\Olympus\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

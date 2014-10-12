@@ -5,13 +5,12 @@ using System.Linq;
 using System.Web;
 using KSEPM.Resources.DisplayNames;
 using KSEPM.Web.Infrastructure.Attributes;
+using KSEPM.Web.Models.BaseViewModels;
 
 namespace KSEPM.Web.Models.ChairViewModels
 {
-    public class ChairViewModel
+    public class ChairViewModel : NameBaseViewModel<int>
     {
-        public int ChairID { get; set; }
-        public string ChairName { get; set; }
         public string ChairLineName { get; set; }
         public IEnumerable<ChairOptionGroupViewModel> ChairOptionGroups { get; set; }
     }

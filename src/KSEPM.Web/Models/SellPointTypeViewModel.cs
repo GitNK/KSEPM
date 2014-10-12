@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using KSEPM.Web.Models.BaseViewModels;
 
 namespace KSEPM.Web.Models
 {
-    public class SellPointTypeViewModel
+    public class SellPointTypeViewModel : NameBaseViewModel<int>
     {
-        public string Name { get; set; }
         public string Value { get; set; }
     }
 }

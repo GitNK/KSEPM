@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using KSEPM.Web.Models.BaseViewModels;
 
 namespace KSEPM.Web.Models.ChairViewModels
 {
-    public class SellViewModel
+    public class SellViewModel : BaseViewModel<int>
     {
-        public int SellID { get; set; }
         public int Position { get; set; }
        // public double Discount { get; set; }
         public long SellDate { get; set; }

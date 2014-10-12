@@ -42,7 +42,7 @@ namespace KSEPM.Web.Controllers
         [HttpPost]
         public JsonResult AddChairSell(SellViewModel chairSell)
         {
-            var chair = _repository.Chairs.Get(chairSell.Chair.ChairID);
+            var chair = _repository.Chairs.Get(chairSell.Chair.ID);
             var chairMultiply = chair.ChairLine.ChairMultiply;
             var optionMultiply = chair.ChairLine.OptionMultiply;
             var chairOptions = chair.ChairOptions
@@ -54,16 +54,16 @@ namespace KSEPM.Web.Controllers
             
             var sell = _repository.Sells.Insert(new Sell
             {
-                ChairID = chairSell.Chair.ChairID,
+                ChairID = chairSell.Chair.ID,
                 Amount = overallAmmount,
                 Points = overallPoints,
-                EmployeeID = chairSell.Seller.SellerID,
-                SellPointID = chairSell.SellPoint.SellPointID,
+                EmployeeID = chairSell.Seller.ID,
+                SellPointID = chairSell.SellPoint.ID,
                 SellDate = DateTimeHelper.UnixTimestampToDateTime(chairSell.SellDate),
                 ChairOptions = chairOptions
             });
-            chairSell.SellID = sell.ID;
-            chairSell.Chair.ChairName = chair.Name;
+            chairSell.ID = sell.ID;
+            chairSell.Chair.Name = chair.Name;
             chairSell.Ammount = overallAmmount;
 
             return Json(chairSell, JsonRequestBehavior.AllowGet);
@@ -82,8 +82,8 @@ namespace KSEPM.Web.Controllers
                     ChairLineName = chairLine.Name,
                     Chairs = chairLine.Chairs.Select(chair => new ChairViewModel
                     {
-                        ChairID = chair.ID,
-                        ChairName = chair.Name
+                        ID = chair.ID,
+                        Name = chair.Name
                     })
                 });
             }
@@ -101,8 +101,8 @@ namespace KSEPM.Web.Controllers
             {
                 sellerInfoListVM.Add(new SellerViewModel
                 {
-                    SellerID = seller.Id,
-                    SellerName = string.Format("{0} {1}", seller.FirstName, seller.SecondName)
+                    ID = seller.Id,
+                    Name = string.Format("{0} {1}", seller.FirstName, seller.SecondName)
                 });
             }
 
@@ -119,8 +119,8 @@ namespace KSEPM.Web.Controllers
             {
                 sellPointListVM.Add(new SellPointViewModel
                 {
-                    SellPointID = sellPoint.ID,
-                    SellPointName = GetLocalizatedString(sellPoint.PointName)
+                    ID = sellPoint.ID,
+                    Name = GetLocalizatedString(sellPoint.PointName)
                 });
             }
 
@@ -148,8 +148,8 @@ namespace KSEPM.Web.Controllers
                         ChairTypeName = GetLocalizatedString(chairOption.Key),
                         ChairOptionNames = chairOption.Select(option => new ChairOptionViewModel
                         {
-                            ChairOptionID = option.ID,
-                            ChairOptionName = GetLocalizatedString(option.Name),
+                            ID = option.ID,
+                            Name = GetLocalizatedString(option.Name),
                             IsBasic = option.IsBasic
                         })
                     });
@@ -158,8 +158,6 @@ namespace KSEPM.Web.Controllers
 
             var model = new ChairViewModel
             {
-                ChairName = chair.Name,
-                ChairLineName = chair.ChairLine.Name,
                 ChairOptionGroups = optionDictionary
             };
 
@@ -178,11 +176,11 @@ namespace KSEPM.Web.Controllers
             {
                 sellInfoList.Add(new SellViewModel
                 {
-                    SellID = sell.ID,
-                    Seller = new SellerViewModel { SellerName = string.Format("{0} {1}", sell.Employee.FirstName, sell.Employee.SecondName) },
-                    SellPoint = new SellPointViewModel { SellPointName = GetLocalizatedString(sell.SellPoint.PointName) },
-                    Chair = new ChairViewModel { ChairName = sell.Chair.Name },
-                    ChairOptions = sell.ChairOptions.Select(x => new ChairOptionViewModel { ChairOptionName = x.Name }),
+                    ID = sell.ID,
+                    Seller = new SellerViewModel { Name = string.Format("{0} {1}", sell.Employee.FirstName, sell.Employee.SecondName) },
+                    SellPoint = new SellPointViewModel { Name = GetLocalizatedString(sell.SellPoint.PointName) },
+                    Chair = new ChairViewModel { Name = sell.Chair.Name },
+                    ChairOptions = sell.ChairOptions.Select(x => new ChairOptionViewModel { Name = x.Name }),
                     SellDate = DateTimeHelper.DateTimeToUnixTimestamp(sell.SellDate),
                     Ammount = sell.Amount
                 });

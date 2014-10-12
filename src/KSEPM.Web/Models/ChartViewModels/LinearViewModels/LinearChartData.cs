@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using KSEPM.Web.Models.BaseViewModels;
 
 namespace KSEPM.Web.Models.ChartViewModels.LinearViewModels
 {
@@ -11,11 +12,8 @@ namespace KSEPM.Web.Models.ChartViewModels.LinearViewModels
         public IEnumerable<EmployeeSellData> EmployeeSellDatas { get; set; }
     }
 
-    public class EmployeeSellData
+    public class EmployeeSellData : NameBaseViewModel<string>
     {
-        public string EmployeeID { get; set; }
-        public string EmployeeName { get; set; }
-
         public IEnumerable<double> AmmountByDays { get; set; }
     }
 }

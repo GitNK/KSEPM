@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kulik System Employees Performance Monitor</title>
     @Styles.Render("~/Content/css")
+    @RenderSection("Styles", false)
 </head>
 <body>
     <header id="top-nav-bar" class="navbar navbar-default">
@@ -100,6 +101,16 @@
                     <span>@MainLayout.V_menu_pie_charts</span>
                 </a>
             </li>
+            <li>
+            @if (User.IsInRole(AccessIdentityRole.Director))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "Olympus")">
+                        <i class="fa fa-university"></i>
+                        <span>@MainLayout.V_menu_olympus</span>
+                    </a>
+                </li>
+            }
             <li>
                 <a href="@Url.Action("Employees", "Account")">
                     <i class="fa fa-users fa-2x"></i>

@@ -117,52 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="V_greetings" xml:space="preserve">
-    <value>Greetings</value>
+  <data name="V_O_main_subtitle" xml:space="preserve">
+    <value>Additional chart for senior management</value>
   </data>
-  <data name="V_language" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="V_language_choosetitle" xml:space="preserve">
-    <value>Choose language</value>
-  </data>
-  <data name="V_menu_about" xml:space="preserve">
-    <value>About us</value>
-  </data>
-  <data name="V_menu_add_sell" xml:space="preserve">
-    <value>Add new sell</value>
-  </data>
-  <data name="V_menu_add_user" xml:space="preserve">
-    <value>Add employee</value>
-  </data>
-  <data name="V_menu_employees" xml:space="preserve">
-    <value>Employees</value>
-  </data>
-  <data name="V_menu_home" xml:space="preserve">
-    <value>Home</value>
-  </data>
-  <data name="V_menu_linear_charts" xml:space="preserve">
-    <value>Linear charts</value>
-  </data>
-  <data name="V_menu_olympus" xml:space="preserve">
-    <value>Olympus</value>
-  </data>
-  <data name="V_menu_pie_charts" xml:space="preserve">
-    <value>Pie charts</value>
-  </data>
-  <data name="V_menu_plans" xml:space="preserve">
-    <value>Plans</value>
-  </data>
-  <data name="V_menu_tables" xml:space="preserve">
-    <value>Tables</value>
-  </data>
-  <data name="V_settingsdropdown_accountsettings_title" xml:space="preserve">
-    <value>Account settings</value>
-  </data>
-  <data name="V_settingsdropdown_anothersettings_title" xml:space="preserve">
-    <value>Another settings</value>
-  </data>
-  <data name="V_settingsdropdown_changepass_link" xml:space="preserve">
-    <value>Change password</value>
+  <data name="V_O_main_title" xml:space="preserve">
+    <value>Hidded detailed chart</value>
   </data>
 </root>

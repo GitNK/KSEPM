@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using KSEPM.Web.Models.BaseViewModels;
 
 namespace KSEPM.Web.Models
 {
-    public class ChairOptionViewModel
+    public class ChairOptionViewModel : NameBaseViewModel<int>
     {
-        public int ChairOptionID { get; set; }
-        public string ChairOptionName { get; set; }
         public bool IsBasic { get; set; }
     }
 }

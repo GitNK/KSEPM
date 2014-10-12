@@ -33,7 +33,7 @@ namespace KSEPM.Web.Controllers
         {
             return View();
         }
-
+        int position = 1;
         [HttpGet]
         [Route("TableInfo")]
         public JsonResult GetTableInfo()
@@ -41,23 +41,27 @@ namespace KSEPM.Web.Controllers
             var employees = GetUsersByRole(AccessIdentityRole.Employee).ToList();
 
             var employeesResults = new List<EmployeeResultViewModel>();
-            for(int i = 0; i < employees.Count; i++)
+            
+            foreach (var employee in employees)
             {
-                var ammount = employees[i].Sells.Sum(x => x.Amount);
-                var points = employees[i].Sells.Sum(x => x.Points);
-                var selledChairsCount = employees[i].Sells.Count;
+                var ammount = employee.Sells.Sum(x => x.Amount);
+                var points = employee.Sells.Sum(x => x.Points);
+                var selledChairsCount = employee.Sells.Count;
 
                 employeesResults.Add(new EmployeeResultViewModel
                 {
-                    Position = i,
-                    Name = string.Format("{0} {1}", employees[i].FirstName, employees[i].SecondName),
+                    Name = string.Format("{0} {1}", employee.FirstName, employee.SecondName),
                     ChairCount = selledChairsCount,
                     Ammount = ammount,
                     Points = Math.Round(points, 2)
                 });
             }
 
-            return Json(employeesResults.OrderByDescending(x => x.Points), JsonRequestBehavior.AllowGet);
+            employeesResults = employeesResults.OrderByDescending(x => x.Points).ToList();
+            foreach (var employee in employeesResults)
+                employee.Position = position++;
+
+            return Json(employeesResults, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -67,25 +71,25 @@ namespace KSEPM.Web.Controllers
             var sells = _repository.Sells.Get().OrderByDescending(x => x.SellDate).ToList();
 
             var sellDetails = new List<SellViewModel>();
-            for (int i = 0; i < sells.Count; i++)
+            foreach (var sell in sells)
             {
                 sellDetails.Add(new SellViewModel
                 {
-                    Position = i + 1,
+                    Position = position++,
                     Seller = new SellerViewModel
                     {
-                        SellerName = string.Format("{0} {1}", sells[i].Employee.FirstName, sells[i].Employee.SecondName),
-                        SellerID = sells[i].EmployeeID
+                        Name = string.Format("{0} {1}", sell.Employee.FirstName, sell.Employee.SecondName),
+                        ID = sell.EmployeeID
                     },
                     SellPoint = new SellPointViewModel
                     {
-                        SellPointID = sells[i].SellPoint.ID,
-                        SellPointName = GetLocalizatedString(sells[i].SellPoint.PointName),
-                        SellPointCity = GetLocalizatedString("DN_SDTVM_", sells[i].SellPoint.City)
+                        ID = sell.SellPoint.ID,
+                        Name = GetLocalizatedString(sell.SellPoint.PointName),
+                        City = GetLocalizatedString("DN_SDTVM_", sell.SellPoint.City)
                     },
-                    SellDate = DateTimeHelper.DateTimeToUnixTimestamp(sells[i].SellDate),
-                    Ammount = sells[i].Amount,
-                    Points = sells[i].Points,
+                    SellDate = DateTimeHelper.DateTimeToUnixTimestamp(sell.SellDate),
+                    Ammount = sell.Amount,
+                    Points = sell.Points,
                     Achievements = "BRO!"
                 });
             }
@@ -173,8 +177,8 @@ namespace KSEPM.Web.Controllers
             foreach (var sellerInfo in newDict)
             {
                 var employee = new EmployeeSellData();
-                employee.EmployeeID = sellerInfo.Key.Id;
-                employee.EmployeeName = sellerInfo.Key.FirstName + " " + sellerInfo.Key.SecondName;
+                employee.ID = sellerInfo.Key.Id;
+                employee.Name = sellerInfo.Key.FirstName + " " + sellerInfo.Key.SecondName;
 
                 var sumList = new List<double>();
                 foreach (var day in dayList)

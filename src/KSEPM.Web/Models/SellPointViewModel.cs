@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using KSEPM.Web.Models.BaseViewModels;
 
 namespace KSEPM.Web.Models
 {
-    public class SellPointViewModel
+    public class SellPointViewModel : NameBaseViewModel<int>
     {
-        public int SellPointID { get; set; }
-        public string SellPointName { get; set; }
-        public string SellPointCity { get; set; }
+        public string City { get; set; }
     }
 }

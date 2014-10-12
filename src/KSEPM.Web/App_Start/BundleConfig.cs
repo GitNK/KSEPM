@@ -55,6 +55,11 @@ namespace KSEPM.Web.App_Start
             bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
                         "~/Scripts/highcharts.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-table").Include(
+                        "~/Scripts/bootstrap-table.js"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap-table").Include(
+                        "~/Content/bootstrap-table.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

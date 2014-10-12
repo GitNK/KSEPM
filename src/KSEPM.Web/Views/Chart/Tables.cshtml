@@ -1,8 +1,14 @@
-﻿@using KSEPM.Resources.Views.Charts
+﻿@using System.Web.Optimization
+@using KSEPM.Resources.Views.Charts
 @using KSEPM.Web.Infrastructure.Identity
 @{
     ViewBag.Title = "Tables";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+{
+    @Styles.Render("~/Content/bootstrap-table")
 }
 
 <div class="main-page-header-title">
@@ -17,23 +23,22 @@
             <i class="fa fa-bars"></i>
             @ChartsResource.V_TC_sum_detailtable_title
         </h5>
-        <table class="table table-condensed table-striped">
+        <table data-toggle="table" data-url="/Chart/TableDetailedInfo/" data-stripped="true" data-height="500">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>@ChartsResource.V_TC_table_td_name</th>
-                    <th class="text-center">@ChartsResource.V_TC_table_td_city</th>
-                    <th class="text-center">@ChartsResource.V_TC_table_td_sell_point</th>
-                    <th class="text-center">@ChartsResource.V_TC_table_td_sell_date</th>
+                    <th data-field="Position" data-sortable="true" class="success">#</th>
+                    <th data-field="Name" data-formatter="sellerNameFormatter">@ChartsResource.V_TC_table_td_name</th>
+                    <th data-formatter="sellPointCityFormatter" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_city</th>
+                    <th data-formatter="sellPointNameFormatter" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_sell_point</th>
+                    <th data-field="SellDate" data-sortable="true" data-formatter="sellDateFormatter" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_sell_date</th>
                     @if (User.IsInRole(AccessIdentityRole.Director))
                     {
-                        <th class="text-center">@ChartsResource.V_TC_table_td_ammount</th>
+                        <th data-field="Ammount" data-sortable="true" data-halign="center" data-align="center" class="warning">@ChartsResource.V_TC_table_td_ammount</th>
                     }
-                    <th class="text-center">@ChartsResource.V_TC_table_td_points</th>
-                    <th>@ChartsResource.V_TC_table_td_achievement</th>
+                    <th data-field="Points" data-sortable="true" data-halign="center" data-align="center" class="info">@ChartsResource.V_TC_table_td_points</th>
+                    <th data-field="Achievements" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_achievement</th>
                 </tr>
             </thead>
-            <tbody id="employeeDetailedSellsTBody"></tbody>
         </table>
     </div>
 
@@ -44,20 +49,19 @@
                     <i class="fa fa-flag-checkered"></i>
                     @ChartsResource.V_TC_overall_table_title
                 </h5>
-                <table class="table table-condensed">
+                <table data-toggle="table" data-url="/Chart/TableInfo/" data-stripped="true" data-height="400" data-row-style="rowStyle">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>@ChartsResource.V_TC_table_td_name</th>
-                            <th class="text-center">@ChartsResource.V_TC_table_td_chaircount</th>
+                            <th data-field="Position" data-sortable="true">#</th>
+                            <th data-field="Name">@ChartsResource.V_TC_table_td_name</th>
+                            <th data-field="ChairCount" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_chaircount</th>
                             @if (User.IsInRole(AccessIdentityRole.Director))
                             {
-                                <th class="text-center">@ChartsResource.V_TC_table_td_ammount</th>
+                                <th data-field="Ammount" data-halign="center" data-align="center" data-sortable="true" class="warning">@ChartsResource.V_TC_table_td_ammount</th>
                             }
-                            <th class="text-center">@ChartsResource.V_TC_table_td_points</th>
+                            <th data-field="Points" data-halign="center" data-align="center" data-sortable="true" class="info">@ChartsResource.V_TC_table_td_points</th>
                         </tr>
                     </thead>
-                    <tbody id="employeeOverallResultTBody"></tbody>
                 </table>
             </div>
             <div id="sellPointsRankingTable">
@@ -88,41 +92,12 @@
 
 @section Scripts
 {
-    <script id="employeeOverallResultTRTemplate" type="text/x-jsrender">
-        <tr class="{{if isFirst}}success{{else isLast}}danger{{/if}}">
-            <td>{{>Position}}</td>
-            <td>{{>Name}}</td>
-            <td class="text-center">{{>ChairCount}}</td>
-            @if (User.IsInRole(AccessIdentityRole.Director))
-            {
-                <td class="text-center {{if isFirst}}success{{else isLast}}{{else}}warning{{/if}}">{{>Ammount}}</td>
-            }
-            <td class="text-center {{if isFirst}}success{{else isLast}}{{else}}info{{/if}}">{{>Points}}</td>
-        </tr>
-    </script>
-
-    <script id="employeeDetailedSellsTRTemplate" type="text/x-jsrender">
-        <tr>
-            <td class="success">{{>Position}}</td>
-            <td>{{>Seller.SellerName}}</td>
-            <td class="text-center">{{>SellPoint.SellPointCity}}</td>
-            <td class="text-center">{{>SellPoint.SellPointName}}</td>
-            <td class="text-center">{{>SellDate}}</td>
-            @if (User.IsInRole(AccessIdentityRole.Director))
-            {
-                <td class="warning text-center">{{>Ammount}}</td>
-            }
-            <td class="info text-center">{{>Points}}</td>
-            <td>{{>Achievements}}</td>
-        </tr>
-    </script>
-
     <script id="sellPointRankTableTRTemplate" type="text/x-jsrender">
         {{for #data}}
         <tr>
             <td class="success">{{:#getIndex() + 1}}</td>
-            <td>{{>SellPointName}}</td>
-            <td class="text-center">{{>SelledChairCount}}</td>
+            <td>{{:SellPointName}}</td>
+            <td class="text-center">{{:SelledChairCount}}</td>
             @if (User.IsInRole(AccessIdentityRole.Director))
             {
                 <td class="text-center">
@@ -132,55 +107,52 @@
                         {{/for}}
                     </select>
                 </td>
-                <td class="warning text-center">{{>Ammount}}</td>
+                <td class="warning text-center">{{:Ammount}}</td>
             }
-            <td class="info text-center">{{>Points}}</td>
+            <td class="info text-center">{{:Points}}</td>
         </tr>
         {{/for}}
     </script>
 
-
-
     <script type="text/javascript">
-        $(function() {
-            $.ajax({
-                type: 'GET',
-                url: '/Chart/TableInfo/',
-                success: function(data) {
-                    for (var i = 0; i < data.length; i++) {
-                        if (i === 0) {
-                            data[i].isFirst = true;
-                        }
-                        if (i === data.length - 1) {
-                            data[i].isLast = true;
-                        }
-                        data[i].Position = i + 1;
-                        $("#employeeOverallResultTBody").append($('#employeeOverallResultTRTemplate').render(data[i]));
-                    }
-                }
-            });
 
-            $.ajax({
-                type: 'GET',
-                url: '/Chart/TableDetailedInfo/',
-                success: function(data) {
-                    for (var i = 0; i < data.length; i++) {
-                        data[i].SellDate = moment(data[i].SellDate * 1000).format("DD.MM.YYYY");
-                        $("#employeeDetailedSellsTBody").append($('#employeeDetailedSellsTRTemplate').render(data[i]));
-                    }
-                }
-            });
+        function sellerNameFormatter(value, row) {
+            return row.Seller.Name;
+        }
 
+        function sellPointCityFormatter(value, row) {
+            return row.SellPoint.City;
+        }
+
+        function sellPointNameFormatter(value, row) {
+            return row.SellPoint.Name;
+        }
+
+        function sellDateFormatter(value, row) {
+            return moment(row.SellDate * 1000).format("DD.MM.YYYY");
+        }
+
+        function rowStyle(row, index, totalRows) {
+            if (index === 0)
+                return { classes: 'success' };
+            if (index === totalRows - 1)
+                return { classes: 'danger' };
+            return {};
+        }
+
+        $(function () {
             $.ajax({
                 type: 'GET',
                 url: '/Chart/SellPointRanking',
-                success: function(data) {
+                success: function (data) {
                     $('#sellPointsRankingTBody').append($('#sellPointRankTableTRTemplate').render(data));
                 },
-                error: function(data) {
+                error: function (data) {
                     alert('Error while calling SellPoingRanking server method');
                 }
             });
+
         });
     </script>
+    @Scripts.Render("~/bundles/bootstrap-table")
 }

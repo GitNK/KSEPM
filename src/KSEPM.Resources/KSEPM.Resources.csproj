@@ -100,6 +100,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ManageAccountResource.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Olympus\OlympusResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OlympusResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Olympus\OlympusResource.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OlympusResource.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Sells\SellResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -170,6 +180,14 @@
     <EmbeddedResource Include="Views\ManageAccount\ManageAccountResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ManageAccountResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Olympus\OlympusResource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OlympusResource.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Olympus\OlympusResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OlympusResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Sells\SellResource.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

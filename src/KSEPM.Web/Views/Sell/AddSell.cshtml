@@ -92,7 +92,7 @@
                     $('#chairTodaySellsDetailedTBody').append($('#selledChairDetailsTemplate').render(data));
 
                     $('.deleteChairSell').on('click', function() {
-                        DeleteChairSell($(this).closest('tr'), $(this).data('sellid'));
+                        DeleteChairSell($(this).closest('tr'), $(this).data('ID'));
                     });
                 }
             });
@@ -170,15 +170,15 @@
 
                     var chairSell = {
                         Seller: {
-                            SellerID: $("#sellerSelectionDropDownList").val(),
-                            SellerName: $("#sellerSelectionDropDownList option:selected").text()
+                            ID: $("#sellerSelectionDropDownList").val(),
+                            Name: $("#sellerSelectionDropDownList option:selected").text()
                         },
                         Sellpoint: {
-                            SellPointID: $("#sellPointSelectionDropDownList").val(),
-                            SellPointName: $("#sellPointSelectionDropDownList option:selected").text()
+                            ID: $("#sellPointSelectionDropDownList").val(),
+                            Name: $("#sellPointSelectionDropDownList option:selected").text()
                         },
                         Chair: {
-                            ChairID: $('#chairSelectionDropDownList').val()
+                            ID: $('#chairSelectionDropDownList').val()
                         },
                         SellDate: momentDate / 1000,
                         ChairOptionIDs: array
@@ -197,7 +197,7 @@
                             $('#chairTodaySellsDetailedTBody').append($('#selledChairDetailsTemplate').render(data));
 
                             $('.deleteChairSell').on('click', function() {
-                                DeleteChairSell($(this).closest('tr'), $(this).data('sellid'));
+                                DeleteChairSell($(this).closest('tr'), $(this).data('id'));
                             });
                         },
                         error: function(data) {
@@ -249,8 +249,8 @@
                     for (var i = 0; i < data.length; i++) {
                         $(sellerDropDownList).append($("<option>",
                         {
-                            value: data[i].SellerID,
-                            text: data[i].SellerName
+                            value: data[i].ID,
+                            text: data[i].Name
                         }));
                     }
 
@@ -286,8 +286,8 @@
                     for (var i = 0; i < data.length; i++) {
                         sellPointDropDownList.append($("<option>",
                         {
-                            value: data[i].SellPointID,
-                            text: data[i].SellPointName
+                            value: data[i].ID,
+                            text: data[i].Name
                         }));
                     }
                 }
@@ -304,7 +304,7 @@
                     ChairTypeName}}
                     {{if IsMultipleSelect}}multiple  size = {^{:ChairOptionNames.length}}{{/if}}>
                     {{for ChairOptionNames}}
-                    <option value={{>ChairOptionID}} {{if IsBasic}}selected{{/if}}>{{>ChairOptionName}}</option>
+                    <option value={{>ID}} {{if IsBasic}}selected{{/if}}>{{>Name}}</option>
                     {{/for}}
                 </select>
             </div>
@@ -317,7 +317,7 @@
         <optgroup label={{>
             ChairLineName}}>
             {{for Chairs}}
-            <option value={{>ChairID}}>{{>ChairName}}</option>
+            <option value={{>ID}}>{{>Name}}</option>
             {{/for}}
         </optgroup>
         {{/for}}
@@ -326,12 +326,12 @@
     <script id="selledChairDetailsTemplate" type="text/x-jsrender">
         {{for #data}}
         <tr>
-            <td class="warning">{{>Seller.SellerName}}</td>
-            <td class="text-center">{{>SellPoint.SellPointName}}</td>
-            <td class="text-center">{{>Chair.ChairName}}</td>
+            <td class="warning">{{>Seller.Name}}</td>
+            <td class="text-center">{{>SellPoint.Name}}</td>
+            <td class="text-center">{{>Chair.Name}}</td>
             <td class="text-center">not implemented</td>
             <td class="info text-center">{{>Ammount}}</td>
-            <td class="text-center"><button class="label label-danger deleteChairSell" data-sellid="{{>SellID}}">@SellResource.V_S_delete_btn</button></td>
+            <td class="text-center"><button class="label label-danger deleteChairSell" data-sellid="{{>ID}}">@SellResource.V_S_delete_btn</button></td>
         </tr>
         {{/for}}
     </script>
