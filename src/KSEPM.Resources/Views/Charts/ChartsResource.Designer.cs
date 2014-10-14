@@ -97,6 +97,15 @@ namespace KSEPM.Resources.Views.Charts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to День.
+        /// </summary>
+        public static string V_TC_day {
+            get {
+                return ResourceManager.GetString("V_TC_day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Показываются основные показатели ввиде стандартных таблиц.
         /// </summary>
         public static string V_TC_main_subtitle {
@@ -111,6 +120,15 @@ namespace KSEPM.Resources.Views.Charts {
         public static string V_TC_main_title {
             get {
                 return ResourceManager.GetString("V_TC_main_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Месяц.
+        /// </summary>
+        public static string V_TC_month {
+            get {
+                return ResourceManager.GetString("V_TC_month", resourceCulture);
             }
         }
         
@@ -219,6 +237,15 @@ namespace KSEPM.Resources.Views.Charts {
         public static string V_TC_table_td_sell_point {
             get {
                 return ResourceManager.GetString("V_TC_table_td_sell_point", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неделя.
+        /// </summary>
+        public static string V_TC_week {
+            get {
+                return ResourceManager.GetString("V_TC_week", resourceCulture);
             }
         }
     }

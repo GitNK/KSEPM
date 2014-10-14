@@ -18,38 +18,52 @@
 
 
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-7 table-box-div">
         <h5 class="table-caption">
             <i class="fa fa-bars"></i>
             @ChartsResource.V_TC_sum_detailtable_title
         </h5>
-        <table data-toggle="table" data-url="/Chart/TableDetailedInfo/" data-stripped="true" data-height="500">
+        <div id="detailed-table-custom-toolbar">
+            <div class="btn-group btn-group-sm table-btngroup-timespan-selector">
+                <button type="button" class="btn btn-default" data-timespan="month">@ChartsResource.V_TC_month</button>
+                <button type="button" class="btn btn-default" data-timespan="week">@ChartsResource.V_TC_week</button>
+                <button type="button" class="btn btn-default" data-timespan="day">@ChartsResource.V_TC_day</button>
+            </div>
+        </div>
+        <table data-toggle="table" data-url="/Chart/TableDetailedInfo" data-stripped="true" data-height="500" data-toolbar="#detailed-table-custom-toolbar" data-show-columns="true">
             <thead>
                 <tr>
-                    <th data-field="Position" data-sortable="true" class="success">#</th>
-                    <th data-field="Name" data-formatter="sellerNameFormatter">@ChartsResource.V_TC_table_td_name</th>
+                    <th data-field="Position" data-sortable="true" data-switchable="false" class="success">#</th>
+                    <th data-field="Name" data-formatter="sellerNameFormatter" data-switchable="false">@ChartsResource.V_TC_table_td_name</th>
                     <th data-formatter="sellPointCityFormatter" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_city</th>
                     <th data-formatter="sellPointNameFormatter" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_sell_point</th>
-                    <th data-field="SellDate" data-sortable="true" data-formatter="sellDateFormatter" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_sell_date</th>
+                    <th data-sortable="true" data-formatter="sellDateFormatter" data-switchable="false" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_sell_date</th>
                     @if (User.IsInRole(AccessIdentityRole.Director))
                     {
-                        <th data-field="Ammount" data-sortable="true" data-halign="center" data-align="center" class="warning">@ChartsResource.V_TC_table_td_ammount</th>
+                        <th data-field="Ammount" data-sortable="true" data-switchable="false" data-halign="center" data-align="center" class="warning">@ChartsResource.V_TC_table_td_ammount</th>
                     }
-                    <th data-field="Points" data-sortable="true" data-halign="center" data-align="center" class="info">@ChartsResource.V_TC_table_td_points</th>
+                    <th data-field="Points" data-sortable="true" data-switchable="false" data-halign="center" data-align="center" class="info">@ChartsResource.V_TC_table_td_points</th>
                     <th data-field="Achievements" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_achievement</th>
                 </tr>
             </thead>
         </table>
     </div>
 
-    <div class="col-md-5">
+    <div class="col-md-5 table-box-div">
         <div class="row">
             <div id="sellerRankingTable">
                 <h5 class="table-caption">
                     <i class="fa fa-flag-checkered"></i>
                     @ChartsResource.V_TC_overall_table_title
                 </h5>
-                <table data-toggle="table" data-url="/Chart/TableInfo/" data-stripped="true" data-height="400" data-row-style="rowStyle">
+                <div id="overall-table-custom-toolbar">
+                    <div class="btn-group btn-group-sm table-btngroup-timespan-selector">
+                        <button type="button" class="btn btn-default" data-timespan="month">@ChartsResource.V_TC_month</button>
+                        <button type="button" class="btn btn-default" data-timespan="week">@ChartsResource.V_TC_week</button>
+                        <button type="button" class="btn btn-default" data-timespan="day">@ChartsResource.V_TC_day</button>
+                    </div>
+                </div>
+                <table data-toggle="table" data-url="/Chart/TableInfo/" data-stripped="true" data-height="300" data-toolbar="#overall-table-custom-toolbar" data-row-style="rowStyle">
                     <thead>
                         <tr>
                             <th data-field="Position" data-sortable="true">#</th>
@@ -129,7 +143,7 @@
         }
 
         function sellDateFormatter(value, row) {
-            return moment(row.SellDate * 1000).format("DD.MM.YYYY");
+            return moment(row.Date * 1000).format("DD.MM.YYYY");
         }
 
         function rowStyle(row, index, totalRows) {
@@ -141,6 +155,17 @@
         }
 
         $(function () {
+
+            $('.table-btngroup-timespan-selector button').click(function (e) {
+                var timespan = $(this).data('timespan');
+                var thisTable = $(this).closest('.table-box-div').find('table[data-toggle="table"]');
+                var thisUrl = thisTable.data('url');
+
+                $(thisTable).bootstrapTable('refresh', {
+                    url: thisUrl + '?timespan=' + timespan
+                });
+            });
+
             $.ajax({
                 type: 'GET',
                 url: '/Chart/SellPointRanking',

@@ -11,6 +11,7 @@
     <title>Kulik System Employees Performance Monitor</title>
     @Styles.Render("~/Content/css")
     @RenderSection("Styles", false)
+    @Styles.Render("~/Content/overrided")
 </head>
 <body>
     <header id="top-nav-bar" class="navbar navbar-default">
@@ -155,11 +156,10 @@
             @RenderBody()
         </div>
         <hr />
-
     </div>
 
     <footer id="bottom-nav-bar" class="nav navbar-fixed-bottom">
-        <p>&copy; Valentina Kostritskaya</p>
+        <p>Valentina Kostritskaya</p>
     </footer>
 
     @Scripts.Render("~/bundles/modernizr")

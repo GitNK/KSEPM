@@ -1,0 +1,9 @@
+﻿.fixed-table-toolbar .bars, .fixed-table-toolbar .search, .fixed-table-toolbar .columns {
+    margin-top: 10px;
+    margin-bottom: 0;
+    line-height: 0;
+}
+
+.fixed-table-toolbar .columns .btn{
+    padding: 4px 10px 4px 10px;
+}

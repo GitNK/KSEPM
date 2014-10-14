@@ -59,7 +59,7 @@ namespace KSEPM.Web.Controllers
                 Points = overallPoints,
                 EmployeeID = chairSell.Seller.ID,
                 SellPointID = chairSell.SellPoint.ID,
-                SellDate = DateTimeHelper.UnixTimestampToDateTime(chairSell.SellDate),
+                SellDate = DateTimeHelper.UnixTimestampToDateTime(chairSell.Date),
                 ChairOptions = chairOptions
             });
             chairSell.ID = sell.ID;
@@ -181,7 +181,7 @@ namespace KSEPM.Web.Controllers
                     SellPoint = new SellPointViewModel { Name = GetLocalizatedString(sell.SellPoint.PointName) },
                     Chair = new ChairViewModel { Name = sell.Chair.Name },
                     ChairOptions = sell.ChairOptions.Select(x => new ChairOptionViewModel { Name = x.Name }),
-                    SellDate = DateTimeHelper.DateTimeToUnixTimestamp(sell.SellDate),
+                    Date = DateTimeHelper.DateTimeToUnixTimestamp(sell.SellDate),
                     Ammount = sell.Amount
                 });
             }

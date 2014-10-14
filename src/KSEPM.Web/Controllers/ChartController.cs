@@ -7,6 +7,9 @@ using KSEPM.Web.Controllers.BaseControllers;
 using KSEPM.Web.Database;
 using KSEPM.Web.Database.Entities;
 using KSEPM.Web.Database.Identity;
+using KSEPM.Web.DataProcessing.Interfaces;
+using KSEPM.Web.Infrastructure;
+using KSEPM.Web.Infrastructure.Enums;
 using KSEPM.Web.Infrastructure.Helpers;
 using KSEPM.Web.Infrastructure.Identity;
 using KSEPM.Web.Models;
@@ -36,25 +39,30 @@ namespace KSEPM.Web.Controllers
         int position = 1;
         [HttpGet]
         [Route("TableInfo")]
-        public JsonResult GetTableInfo()
+        public JsonResult GetTableInfo(TimeInterval timespan = TimeInterval.Day)
         {
             var employees = GetUsersByRole(AccessIdentityRole.Employee).ToList();
 
             var employeesResults = new List<EmployeeResultViewModel>();
-            
+
             foreach (var employee in employees)
             {
-                var ammount = employee.Sells.Sum(x => x.Amount);
-                var points = employee.Sells.Sum(x => x.Points);
-                var selledChairsCount = employee.Sells.Count;
+                var filteredSells = employee.Sells.FilderByDate(timespan);
 
-                employeesResults.Add(new EmployeeResultViewModel
+                var ammount = filteredSells.Sum(x => x.Amount);
+                var points = filteredSells.Sum(x => x.Points);
+                if (filteredSells.Any())
                 {
-                    Name = string.Format("{0} {1}", employee.FirstName, employee.SecondName),
-                    ChairCount = selledChairsCount,
-                    Ammount = ammount,
-                    Points = Math.Round(points, 2)
-                });
+                    var selledChairsCount = filteredSells.Count;
+
+                    employeesResults.Add(new EmployeeResultViewModel
+                    {
+                        Name = string.Format("{0} {1}", employee.FirstName, employee.SecondName),
+                        ChairCount = selledChairsCount,
+                        Ammount = ammount,
+                        Points = Math.Round(points, 2)
+                    });
+                }
             }
 
             employeesResults = employeesResults.OrderByDescending(x => x.Points).ToList();
@@ -66,9 +74,9 @@ namespace KSEPM.Web.Controllers
 
         [HttpGet]
         [Route("TableDetailedInfo")]
-        public JsonResult GetTableDetailedInfo()
+        public JsonResult GetTableDetailedInfo(TimeInterval timespan = TimeInterval.Day)
         {
-            var sells = _repository.Sells.Get().OrderByDescending(x => x.SellDate).ToList();
+            var sells = _repository.Sells.Get().OrderByDescending(x => x.SellDate).FilderByDate(timespan);
 
             var sellDetails = new List<SellViewModel>();
             foreach (var sell in sells)
@@ -87,7 +95,7 @@ namespace KSEPM.Web.Controllers
                         Name = GetLocalizatedString(sell.SellPoint.PointName),
                         City = GetLocalizatedString("DN_SDTVM_", sell.SellPoint.City)
                     },
-                    SellDate = DateTimeHelper.DateTimeToUnixTimestamp(sell.SellDate),
+                    Date = DateTimeHelper.DateTimeToUnixTimestamp(sell.SellDate),
                     Ammount = sell.Amount,
                     Points = sell.Points,
                     Achievements = "BRO!"

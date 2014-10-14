@@ -168,6 +168,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Icons.css" />
+    <Content Include="Content\Overrided.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -268,7 +269,9 @@
     <Compile Include="Database\Repositories\SellPointRepository.cs" />
     <Compile Include="Database\Repositories\SellRepository.cs" />
     <Compile Include="DataProcessing\DataAggregator.cs" />
+    <Compile Include="DataProcessing\DateProcessor.cs" />
     <Compile Include="DataProcessing\Interfaces\IDataAggregator.cs" />
+    <Compile Include="DataProcessing\Interfaces\IDateProcessor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,11 +279,14 @@
     <Compile Include="Infrastructure\Attributes\ModelValidation\CRequiredAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\ModelValidation\CStringLengthAttribute.cs" />
     <Compile Include="Infrastructure\AutoMappingConfigurations\ChairsToChairViewModel.cs" />
+    <Compile Include="Infrastructure\Enums\TimeInterval.cs" />
+    <Compile Include="Infrastructure\ExtentionMethods.cs" />
     <Compile Include="Infrastructure\Helpers\AttributeHelper.cs" />
     <Compile Include="Infrastructure\Helpers\CultureHelper.cs" />
     <Compile Include="Infrastructure\Helpers\DateTimeHelper.cs" />
     <Compile Include="Infrastructure\Identity\AccessIdentityRole.cs" />
     <Compile Include="Infrastructure\Identity\PasswordGenerator.cs" />
+    <Compile Include="Infrastructure\Interfaces\IDateFilter.cs" />
     <Compile Include="Infrastructure\TypeMapping\AutoMapperAdapter.cs" />
     <Compile Include="Infrastructure\TypeMapping\AutoMapperConfigurator.cs" />
     <Compile Include="Infrastructure\TypeMapping\IAutoMapper.cs" />

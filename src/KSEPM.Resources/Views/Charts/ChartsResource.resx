@@ -129,11 +129,17 @@
   <data name="V_PC_main_title" xml:space="preserve">
     <value>Круговые графики</value>
   </data>
+  <data name="V_TC_day" xml:space="preserve">
+    <value>День</value>
+  </data>
   <data name="V_TC_main_subtitle" xml:space="preserve">
     <value>Показываются основные показатели ввиде стандартных таблиц</value>
   </data>
   <data name="V_TC_main_title" xml:space="preserve">
     <value>Базовые таблицы эффективности</value>
+  </data>
+  <data name="V_TC_month" xml:space="preserve">
+    <value>Месяц</value>
   </data>
   <data name="V_TC_overall_table_title" xml:space="preserve">
     <value>Рейтинг продавцов</value>
@@ -170,5 +176,8 @@
   </data>
   <data name="V_TC_table_td_sell_point" xml:space="preserve">
     <value>Точка продажи</value>
+  </data>
+  <data name="V_TC_week" xml:space="preserve">
+    <value>Неделя</value>
   </data>
 </root>

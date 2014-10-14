@@ -61,6 +61,9 @@ namespace KSEPM.Web.App_Start
             bundles.Add(new StyleBundle("~/Content/bootstrap-table").Include(
                         "~/Content/bootstrap-table.css"));
 
+            bundles.Add(new StyleBundle("~/Content/overrided").Include(
+                        "~/Content/Overrided.css"));
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
 #if DEBUG

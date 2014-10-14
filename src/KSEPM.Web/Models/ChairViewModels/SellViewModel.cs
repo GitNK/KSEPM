@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using KSEPM.Web.Infrastructure.Interfaces;
 using KSEPM.Web.Models.BaseViewModels;
 
 namespace KSEPM.Web.Models.ChairViewModels
@@ -11,7 +12,7 @@ namespace KSEPM.Web.Models.ChairViewModels
     {
         public int Position { get; set; }
        // public double Discount { get; set; }
-        public long SellDate { get; set; }
+        public long Date { get; set; }
         public double Ammount { get; set; }
         public double Points { get; set; }
         public string Achievements { get; set; }

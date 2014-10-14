@@ -5,10 +5,11 @@ using System.Linq;
 using System.Web;
 using KSEPM.Web.Database.Identity;
 using KSEPM.Web.Infrastructure.Attributes;
+using KSEPM.Web.Infrastructure.Interfaces;
 
 namespace KSEPM.Web.Database.Entities
 {
-    public class Sell : EntityBase
+    public class Sell : EntityBase, IDateFilter
     {
         public double Amount { get; set; }
         public double Points { get; set; }

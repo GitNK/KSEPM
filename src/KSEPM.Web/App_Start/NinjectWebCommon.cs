@@ -1,6 +1,8 @@
 
 using System.Web.Mvc;
 using KSEPM.Web.Database;
+using KSEPM.Web.DataProcessing;
+using KSEPM.Web.DataProcessing.Interfaces;
 using KSEPM.Web.Infrastructure.AutoMappingConfigurations;
 using KSEPM.Web.Infrastructure.TypeMapping;
 using Ninject.Web.Mvc;
@@ -80,6 +82,7 @@ namespace KSEPM.Web.App_Start
             kernel.Bind<IAutoMapper>().To<AutoMapperAdapter>().InSingletonScope();
 
             kernel.Bind<IAutoMapperTypeConfigurator>().To<ChairsToChairViewModel>().InSingletonScope();
+            kernel.Bind<IDateProcessor>().To<DateProcessor>();
         } 
     }
 }
