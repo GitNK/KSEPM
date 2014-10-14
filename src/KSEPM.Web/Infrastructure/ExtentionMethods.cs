@@ -11,7 +11,7 @@ namespace KSEPM.Web.Infrastructure
 {
     public static class ExtentionMethods
     {
-        public static List<T> FilderByDate<T>(this IEnumerable<T> list, TimeInterval timespan) where T : IDateFilter
+        public static List<T> FilterByDate<T>(this IEnumerable<T> list, TimeInterval timespan) where T : IDateFilter
         {
             var dateProcessor = new DateProcessor();
             return list.ToList().FindAll(x => x.SellDate >= DateTime.Now.AddDays(-dateProcessor.DateCountToDecrease(timespan)));

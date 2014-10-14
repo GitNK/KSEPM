@@ -27,7 +27,7 @@
             <div class="btn-group btn-group-sm table-btngroup-timespan-selector">
                 <button type="button" class="btn btn-default" data-timespan="month">@ChartsResource.V_TC_month</button>
                 <button type="button" class="btn btn-default" data-timespan="week">@ChartsResource.V_TC_week</button>
-                <button type="button" class="btn btn-default" data-timespan="day">@ChartsResource.V_TC_day</button>
+                <button type="button" class="btn btn-default active" data-timespan="day">@ChartsResource.V_TC_day</button>
             </div>
         </div>
         <table data-toggle="table" data-url="/Chart/TableDetailedInfo" data-stripped="true" data-height="500" data-toolbar="#detailed-table-custom-toolbar" data-show-columns="true">
@@ -60,7 +60,7 @@
                     <div class="btn-group btn-group-sm table-btngroup-timespan-selector">
                         <button type="button" class="btn btn-default" data-timespan="month">@ChartsResource.V_TC_month</button>
                         <button type="button" class="btn btn-default" data-timespan="week">@ChartsResource.V_TC_week</button>
-                        <button type="button" class="btn btn-default" data-timespan="day">@ChartsResource.V_TC_day</button>
+                        <button type="button" class="btn btn-default active" data-timespan="day">@ChartsResource.V_TC_day</button>
                     </div>
                 </div>
                 <table data-toggle="table" data-url="/Chart/TableInfo/" data-stripped="true" data-height="300" data-toolbar="#overall-table-custom-toolbar" data-row-style="rowStyle">
@@ -155,6 +155,10 @@
         }
 
         $(function () {
+
+            $(".btn-group > .btn").click(function () {
+                $(this).addClass("active").siblings().removeClass("active");
+            });
 
             $('.table-btngroup-timespan-selector button').click(function (e) {
                 var timespan = $(this).data('timespan');

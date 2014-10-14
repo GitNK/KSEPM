@@ -47,7 +47,7 @@ namespace KSEPM.Web.Controllers
 
             foreach (var employee in employees)
             {
-                var filteredSells = employee.Sells.FilderByDate(timespan);
+                var filteredSells = employee.Sells.FilterByDate(timespan);
 
                 var ammount = filteredSells.Sum(x => x.Amount);
                 var points = filteredSells.Sum(x => x.Points);
@@ -76,7 +76,7 @@ namespace KSEPM.Web.Controllers
         [Route("TableDetailedInfo")]
         public JsonResult GetTableDetailedInfo(TimeInterval timespan = TimeInterval.Day)
         {
-            var sells = _repository.Sells.Get().OrderByDescending(x => x.SellDate).FilderByDate(timespan);
+            var sells = _repository.Sells.Get().OrderByDescending(x => x.SellDate).FilterByDate(timespan);
 
             var sellDetails = new List<SellViewModel>();
             foreach (var sell in sells)
