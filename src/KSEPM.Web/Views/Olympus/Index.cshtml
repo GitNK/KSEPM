@@ -1,7 +1,8 @@
-﻿@using KSEPM.Resources.Views.Olympus
+﻿@using KSEPM.Resources.DisplayNames
+@using KSEPM.Resources.Views.Olympus
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Olympus";
 }
 
 <div class="main-page-header-title">
@@ -9,3 +10,121 @@
     <p>@OlympusResource.V_O_main_subtitle</p>
 </div>
 
+<div id="olympusContainer">
+    <div class="row">
+        <div class="col-md-5 table-box-div">
+            <h5 class="table-caption">
+                <i class="fa fa-bars"></i>
+                @OlympusResource.V_O_detailed_chairtable_title
+            </h5>
+            <div id="selled-chairs-table-custom-toolbar">
+                <div class="btn-group">
+                    <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span id="olympusButtonText">Small button</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-month-selector" role="menu">
+                        <li><a data-value="january">@DisplayName.DN_january</a></li>
+                        <li><a data-value="february">@DisplayName.DN_february</a></li>
+                        <li><a data-value="march">@DisplayName.DN_march</a></li>
+                        <li><a data-value="april">@DisplayName.DN_april</a></li>
+                        <li><a data-value="may">@DisplayName.DN_may</a></li>
+                        <li><a data-value="june">@DisplayName.DN_june</a></li>
+                        <li><a data-value="july">@DisplayName.DN_july</a></li>
+                        <li><a data-value="august">@DisplayName.DN_august</a></li>
+                        <li><a data-value="september">@DisplayName.DN_september</a></li>
+                        <li><a data-value="october">@DisplayName.DN_october</a></li>
+                        <li><a data-value="november">@DisplayName.DN_november</a></li>
+                        <li><a data-value="december">@DisplayName.DN_december</a></li>
+                    </ul>
+                </div>
+            </div>
+            <table data-toggle="table" data-url="/Olympus/ChairSells" data-stripped="true" data-height="500" data-toolbar="#selled-chairs-table-custom-toolbar">
+                <thead>
+                    <tr>
+                        <th data-field="Position" data-sortable="true">#</th>
+                        <th data-field="Name" data-switchable="false">@DisplayName.DN_chair</th>
+                        <th data-field="Count" data-sortable="true" data-switchable="false" data-halign="center" data-align="center" class="info">@DisplayName.DN_count</th>
+                        <th data-field="Ammount" data-sortable="true" data-switchable="false" data-halign="center" data-align="center" class="warning">@DisplayName.DN_Ammount</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            KSEPM.Olympus.Initialize({
+                containerId: '#olympusContainer'
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        KSEPM.namespace("KSEPM").Olympus = (function () {
+
+            var $dropdownSelector;
+            var $containerId;
+            var $dropdownButton;
+            var $tableContainer;
+
+            function _init(options) {
+
+                if (!options)
+                    throw 'KSEPM.Olympus option is null';
+
+                
+                var month = new Array();
+                month[0] = "january";
+                month[1] = "february";
+                month[2] = "march";
+                month[3] = "april";
+                month[4] = "may";
+                month[5] = "june";
+                month[6] = "july";
+                month[7] = "august";
+                month[8] = "september";
+                month[9] = "october";
+                month[10] = "november";
+                month[11] = "december";
+
+                var date = new Date();
+                var monthName = month[date.getMonth()];
+                $containerId = options.containerId;
+                $dropdownSelector = $containerId + ' .dropdown-month-selector a';
+                $dropdownButton = $containerId + ' #olympusButtonText';
+                $tableContainer = $containerId + ' table[data-toggle="table"]';
+
+                $($dropdownButton).html(function () {
+                    return $($dropdownSelector+'[data-value=' + monthName + ']').text();
+                });
+
+                $($dropdownSelector).click(function () {
+                    var monthData = $(this).data('value');
+                    var monthValue = $(this).text();
+
+                    _refreshTable(monthData);
+
+                    $($dropdownButton).html(monthValue);
+                });
+            }
+
+            function _refreshTable(monthData) {
+
+                var thisUrl = $($tableContainer).data('url');
+
+                $($tableContainer).bootstrapTable('refresh', {
+                    url: thisUrl + '?month=' + monthData
+                });
+            }
+
+            //Public
+            return {
+                Initialize: _init
+            };
+
+        })();
+    </script>
+}

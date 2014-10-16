@@ -222,6 +222,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jsrender.js" />
     <Content Include="Scripts\jsrender.min.js" />
+    <Content Include="Scripts\KSEPMjs\global.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -279,6 +280,8 @@
     <Compile Include="Infrastructure\Attributes\ModelValidation\CRequiredAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\ModelValidation\CStringLengthAttribute.cs" />
     <Compile Include="Infrastructure\AutoMappingConfigurations\ChairsToChairViewModel.cs" />
+    <Compile Include="DataProcessing\Common\DateTimeInterval.cs" />
+    <Compile Include="Infrastructure\Enums\Month.cs" />
     <Compile Include="Infrastructure\Enums\TimeInterval.cs" />
     <Compile Include="Infrastructure\ExtentionMethods.cs" />
     <Compile Include="Infrastructure\Helpers\AttributeHelper.cs" />
@@ -334,6 +337,7 @@
     <Compile Include="Models\ChartViewModels\TablesViewModels\SellPointRankViewModel.cs" />
     <Compile Include="Models\ManageAccountViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="Models\Misc\LocalizationViewModel.cs" />
+    <Compile Include="Models\OlympusViewModels\MontlyChairSellViewModel.cs" />
     <Compile Include="Models\SellerViewModel.cs" />
     <Compile Include="Models\SellPointTypeViewModel.cs" />
     <Compile Include="Models\SellPointViewModel.cs" />

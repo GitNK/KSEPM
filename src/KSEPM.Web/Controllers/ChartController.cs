@@ -47,13 +47,13 @@ namespace KSEPM.Web.Controllers
 
             foreach (var employee in employees)
             {
-                var filteredSells = employee.Sells.FilterByDate(timespan);
+                var filteredSells = employee.Sells.FilterByDate(timespan).ToList();
 
                 var ammount = filteredSells.Sum(x => x.Amount);
                 var points = filteredSells.Sum(x => x.Points);
                 if (filteredSells.Any())
                 {
-                    var selledChairsCount = filteredSells.Count;
+                    var selledChairsCount = filteredSells.Count();
 
                     employeesResults.Add(new EmployeeResultViewModel
                     {
@@ -142,9 +142,7 @@ namespace KSEPM.Web.Controllers
         [HttpGet]
         public JsonResult GetLastWeekSells()
         {
-            var sells = _repository.Sells.Get().Where(x => x.SellDate.ToLocalTime() >= DateTime.Now.AddDays(-7)).ToList();
-            foreach (var sell in sells)
-                sell.SellDate = sell.SellDate.ToLocalTime();
+            var sells = _repository.Sells.Get().Where(x => x.SellDate >= DateTime.Now.AddDays(-7)).ToList();
 
 
             var sellers = GetUsersByRole(AccessIdentityRole.Employee);
@@ -169,6 +167,8 @@ namespace KSEPM.Web.Controllers
                 DateTime.Today.AddDays(-5),
                 DateTime.Today.AddDays(-6)
             };
+
+            dayList.Reverse();
 
             var newDict = new Dictionary<ApplicationUser, IEnumerable<IGrouping<DateTime, Sell>>>();
             foreach (var dic in dict)
@@ -209,6 +209,7 @@ namespace KSEPM.Web.Controllers
                 employeeSellData.Add(employee);
             }
 
+            dayList.Reverse();
 
             var linearChartData = new LinearChartData
             {

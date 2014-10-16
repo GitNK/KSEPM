@@ -9,7 +9,7 @@ namespace KSEPM.Web.Infrastructure.Helpers
     {
         public static DateTime UnixTimestampToDateTime(long unixTimeStamp)
         {
-            var unixStart = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
+            var unixStart = new DateTime(1970, 1, 1, 3, 0, 0, 0, DateTimeKind.Local);
             long unixTimeStampInTicks = (unixTimeStamp * TimeSpan.TicksPerSecond);
             return new DateTime(unixStart.Ticks + unixTimeStampInTicks, DateTimeKind.Local);
         }

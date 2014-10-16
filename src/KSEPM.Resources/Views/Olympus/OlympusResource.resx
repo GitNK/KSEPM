@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="V_O_detailed_chairtable_title" xml:space="preserve">
+    <value>Проданные кресла</value>
+  </data>
   <data name="V_O_main_subtitle" xml:space="preserve">
-    <value>Additional chart for senior management</value>
+    <value>Дополнительные графики доступные только высшему руководству</value>
   </data>
   <data name="V_O_main_title" xml:space="preserve">
-    <value>Hidded detailed chart</value>
+    <value>Дополнительные графики</value>
   </data>
 </root>

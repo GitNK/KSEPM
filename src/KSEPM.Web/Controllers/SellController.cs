@@ -51,7 +51,7 @@ namespace KSEPM.Web.Controllers
 
             var overallAmmount = optionAmmount + chair.Price;
             var overallPoints = (optionAmmount * optionMultiply + chair.Price * chairMultiply) / 100;
-            
+
             var sell = _repository.Sells.Insert(new Sell
             {
                 ChairID = chairSell.Chair.ID,
@@ -168,7 +168,7 @@ namespace KSEPM.Web.Controllers
         [HttpGet]
         public JsonResult GetTodaySells()
         {
-            var sells = _repository.Sells.Get().Where(x => x.SellDate.ToLocalTime() >= DateTime.Now.AddDays(-1)).ToList();
+            var sells = _repository.Sells.Get().Where(x => x.SellDate >= DateTime.Now.AddDays(-1)).ToList();
 
             var sellInfoList = new List<SellViewModel>();
 

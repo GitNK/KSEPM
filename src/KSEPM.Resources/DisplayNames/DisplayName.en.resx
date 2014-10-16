@@ -263,4 +263,49 @@
   <data name="DN_SDTVM_Kharkiv" xml:space="preserve">
     <value>Kharkiv</value>
   </data>
+  <data name="DN_Ammount" xml:space="preserve">
+    <value>Ammount</value>
+  </data>
+  <data name="DN_april" xml:space="preserve">
+    <value>April</value>
+  </data>
+  <data name="DN_august" xml:space="preserve">
+    <value>August</value>
+  </data>
+  <data name="DN_chair" xml:space="preserve">
+    <value>Chair</value>
+  </data>
+  <data name="DN_count" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="DN_december" xml:space="preserve">
+    <value>December</value>
+  </data>
+  <data name="DN_february" xml:space="preserve">
+    <value>February</value>
+  </data>
+  <data name="DN_january" xml:space="preserve">
+    <value>January</value>
+  </data>
+  <data name="DN_july" xml:space="preserve">
+    <value>July</value>
+  </data>
+  <data name="DN_june" xml:space="preserve">
+    <value>June</value>
+  </data>
+  <data name="DN_march" xml:space="preserve">
+    <value>March</value>
+  </data>
+  <data name="DN_may" xml:space="preserve">
+    <value>May</value>
+  </data>
+  <data name="DN_november" xml:space="preserve">
+    <value>November</value>
+  </data>
+  <data name="DN_october" xml:space="preserve">
+    <value>October</value>
+  </data>
+  <data name="DN_september" xml:space="preserve">
+    <value>September</value>
+  </data>
 </root>

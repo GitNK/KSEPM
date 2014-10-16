@@ -6,11 +6,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Styles
-{
-    @Styles.Render("~/Content/bootstrap-table")
-}
-
 <div class="main-page-header-title">
     <h3>@ChartsResource.V_TC_main_title</h3>
     <p>@ChartsResource.V_TC_main_subtitle</p>
@@ -129,47 +124,7 @@
     </script>
 
     <script type="text/javascript">
-
-        function sellerNameFormatter(value, row) {
-            return row.Seller.Name;
-        }
-
-        function sellPointCityFormatter(value, row) {
-            return row.SellPoint.City;
-        }
-
-        function sellPointNameFormatter(value, row) {
-            return row.SellPoint.Name;
-        }
-
-        function sellDateFormatter(value, row) {
-            return moment(row.Date * 1000).format("DD.MM.YYYY");
-        }
-
-        function rowStyle(row, index, totalRows) {
-            if (index === 0)
-                return { classes: 'success' };
-            if (index === totalRows - 1)
-                return { classes: 'danger' };
-            return {};
-        }
-
         $(function () {
-
-            $(".btn-group > .btn").click(function () {
-                $(this).addClass("active").siblings().removeClass("active");
-            });
-
-            $('.table-btngroup-timespan-selector button').click(function (e) {
-                var timespan = $(this).data('timespan');
-                var thisTable = $(this).closest('.table-box-div').find('table[data-toggle="table"]');
-                var thisUrl = thisTable.data('url');
-
-                $(thisTable).bootstrapTable('refresh', {
-                    url: thisUrl + '?timespan=' + timespan
-                });
-            });
-
             $.ajax({
                 type: 'GET',
                 url: '/Chart/SellPointRanking',
@@ -183,5 +138,5 @@
 
         });
     </script>
-    @Scripts.Render("~/bundles/bootstrap-table")
+    
 }

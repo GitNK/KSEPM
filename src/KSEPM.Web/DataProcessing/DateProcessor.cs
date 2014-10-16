@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using KSEPM.Web.DataProcessing.Common;
 using KSEPM.Web.DataProcessing.Interfaces;
+using KSEPM.Web.Infrastructure;
 using KSEPM.Web.Infrastructure.Enums;
 
 namespace KSEPM.Web.DataProcessing
@@ -45,6 +47,23 @@ namespace KSEPM.Web.DataProcessing
                     return 7;
             }
             return 1;
+        }
+
+        public DateTimeInterval GetDateTimeInterval(Month month)
+        {
+            var now = DateTime.Now;
+            //initializing in case when month in undefined(first call from UI)
+            var nowMonth = now.Month;
+
+            if (month != Month.Undefined)
+                nowMonth = month.GetEnumValue();
+
+            var daysInMonth = DateTime.DaysInMonth(now.Year, nowMonth);
+
+            var from = new DateTime(now.Year, nowMonth, 1);
+            var until = new DateTime(now.Year, nowMonth, daysInMonth);
+
+            return new DateTimeInterval(from, until);
         }
     }
 }

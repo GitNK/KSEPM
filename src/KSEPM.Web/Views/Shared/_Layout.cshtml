@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kulik System Employees Performance Monitor</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap-table")
     @RenderSection("Styles", false)
     @Styles.Render("~/Content/overrided")
 </head>
@@ -118,7 +119,7 @@
                     <span>@MainLayout.V_menu_employees</span>
                 </a>
             </li>
-            <li>
+           @* <li>
                 <a href="@Url.Action("Future", "Home")">
                     <i class="fa fa-cubes fa-2x"></i>
                     <span>@MainLayout.V_menu_plans</span>
@@ -129,7 +130,7 @@
                     <i class="fa fa-globe fa-2x"></i>
                     <span>@MainLayout.V_menu_about</span>
                 </a>
-            </li>
+            </li>*@
             @if (User.IsInRole(AccessIdentityRole.SubAdmin))
             {
                 <li>
@@ -164,13 +165,14 @@
 
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
-
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/global")
     @Scripts.Render("~/bundles/moment")
     @Scripts.Render("~/bundles/datetimepicker")
     @Scripts.Render("~/bundles/jsrender")
     @Scripts.Render("~/bundles/sitetheme");
     @Scripts.Render("~/bundles/dateformat");
+    @Scripts.Render("~/bundles/bootstrap-table")
     @RenderSection("scripts", required: false)
 </body>
 </html>
