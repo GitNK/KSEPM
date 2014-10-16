@@ -92,7 +92,7 @@
                     $('#chairTodaySellsDetailedTBody').append($('#selledChairDetailsTemplate').render(data));
 
                     $('.deleteChairSell').on('click', function() {
-                        DeleteChairSell($(this).closest('tr'), $(this).data('ID'));
+                        DeleteChairSell($(this).closest('tr'), $(this).data('id'));
                     });
                 }
             });
@@ -208,7 +208,6 @@
             });
 
             function DeleteChairSell(row, sellID) {
-
                 $.ajax({
                     type: 'GET',
                     url: '/Sell/DeleteSell/',
@@ -331,7 +330,7 @@
             <td class="text-center">{{>Chair.Name}}</td>
             <td class="text-center">not implemented</td>
             <td class="info text-center">{{>Ammount}}</td>
-            <td class="text-center"><button class="label label-danger deleteChairSell" data-sellid="{{>ID}}">@SellResource.V_S_delete_btn</button></td>
+            <td class="text-center"><button class="label label-danger deleteChairSell" data-id="{{>ID}}">@SellResource.V_S_delete_btn</button></td>
         </tr>
         {{/for}}
     </script>
