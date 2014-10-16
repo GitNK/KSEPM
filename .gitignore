@@ -7,8 +7,8 @@ src/KSEPM.Domain/obj
 src/KSEPM.Common/bin
 src/KSEPM.Common/obj
 src/Tests/KSEPM.Web.Tests/bin
-src/Tests/KSEPM.Web.Tests/bin
+src/Tests/KSEPM.Web.Tests/obj
 src/Tests/KSEPM.Common.Tests/bin
-src/Tests/KSEPM.Common.Tests/bin
+src/Tests/KSEPM.Common.Tests/obj
 *.suo
 *.user
