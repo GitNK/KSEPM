@@ -6,5 +6,9 @@ src/KSEPM.Domain/bin
 src/KSEPM.Domain/obj
 src/KSEPM.Common/bin
 src/KSEPM.Common/obj
+src/Tests/KSEPM.Web.Tests/bin
+src/Tests/KSEPM.Web.Tests/bin
+src/Tests/KSEPM.Common.Tests/bin
+src/Tests/KSEPM.Common.Tests/bin
 *.suo
 *.user
