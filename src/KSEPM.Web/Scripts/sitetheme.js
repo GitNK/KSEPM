@@ -1,24 +1,44 @@
 ﻿
 function sellerNameFormatter(value, row) {
-    return row.Seller.Name;
+    if (row.Seller)
+        return row.Seller.Name;
 }
 
 function sellPointCityFormatter(value, row) {
-    return row.SellPoint.City;
+    if (row.SellPoint)
+        return row.SellPoint.City;
 }
 
 function sellPointNameFormatter(value, row) {
-    return row.SellPoint.Name;
+    if (row.SellPoint)
+        return row.SellPoint.Name;
 }
 
 function sellDateFormatter(value, row) {
-    return moment(row.Date * 1000).format("DD.MM.YYYY");
+    if (row.Date)
+        return moment(row.Date * 1000).format("DD.MM.YYYY");
+}
+
+function positionFormatter(value, row) {
+    if (row.Position)
+        return row.Position;
+}
+
+function pointsFormatter(value, row) {
+    if (row.Points)
+        return row.Points;
 }
 
 function rowStyle(row, index, totalRows) {
     if (index === 0)
         return { classes: 'success' };
-    if (index === totalRows - 1)
+    if(index === totalRows - 1)
+        return { classes: 'danger' };
+    return {};
+}
+
+function zeroPositionRowStyle(row, index, totalRows) {
+    if (row.Position == 0) 
         return { classes: 'danger' };
     return {};
 }
@@ -51,7 +71,7 @@ $(function () {
 
         return {
             Initialize: _init
-    };
+        };
     })();
     KSEPMTemplateHelpers.Initialize();
 
@@ -69,5 +89,5 @@ $(function () {
         });
     });
 
-    
+
 });

@@ -101,6 +101,14 @@ namespace KSEPM.Web.Controllers
                     Achievements = "BRO!"
                 });
             }
+
+            //summary ammount. Only for director+ acc
+            if (User.IsInRole(AccessIdentityRole.Director))
+                sellDetails.Add(new SellViewModel
+                {
+                    Ammount = sells.Sum(x => x.Amount)
+                });
+
             return Json(sellDetails, JsonRequestBehavior.AllowGet);
         }
 
@@ -201,7 +209,7 @@ namespace KSEPM.Web.Controllers
                             hasValue = true;
                         }
                     }
-                    if(!hasValue)
+                    if (!hasValue)
                         sumList.Add(0);
                 }
 

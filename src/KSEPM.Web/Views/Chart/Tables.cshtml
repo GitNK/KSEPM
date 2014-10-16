@@ -25,10 +25,10 @@
                 <button type="button" class="btn btn-default active" data-timespan="day">@ChartsResource.V_TC_day</button>
             </div>
         </div>
-        <table data-toggle="table" data-url="/Chart/TableDetailedInfo" data-stripped="true" data-height="500" data-toolbar="#detailed-table-custom-toolbar" data-show-columns="true">
+        <table data-toggle="table" data-url="/Chart/TableDetailedInfo" data-stripped="true" data-height="500" data-toolbar="#detailed-table-custom-toolbar" data-show-columns="true" data-row-style="zeroPositionRowStyle">
             <thead>
                 <tr>
-                    <th data-field="Position" data-sortable="true" data-switchable="false" class="success">#</th>
+                    <th data-sortable="true" data-switchable="false" class="success" data-formatter="positionFormatter">#</th>
                     <th data-field="Name" data-formatter="sellerNameFormatter" data-switchable="false">@ChartsResource.V_TC_table_td_name</th>
                     <th data-formatter="sellPointCityFormatter" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_city</th>
                     <th data-formatter="sellPointNameFormatter" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_sell_point</th>
@@ -37,7 +37,7 @@
                     {
                         <th data-field="Ammount" data-sortable="true" data-switchable="false" data-halign="center" data-align="center" class="warning">@ChartsResource.V_TC_table_td_ammount</th>
                     }
-                    <th data-field="Points" data-sortable="true" data-switchable="false" data-halign="center" data-align="center" class="info">@ChartsResource.V_TC_table_td_points</th>
+                    <th data-formatter="pointsFormatter" data-sortable="true" data-switchable="false" data-halign="center" data-align="center" class="info">@ChartsResource.V_TC_table_td_points</th>
                     <th data-field="Achievements" data-halign="center" data-align="center">@ChartsResource.V_TC_table_td_achievement</th>
                 </tr>
             </thead>
