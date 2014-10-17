@@ -15,6 +15,34 @@
     @Styles.Render("~/Content/overrided")
 </head>
 <body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="callbackModalWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Оставить отзыв или пожелание</h4>
+                </div>
+                <form id="callbackSubmitForm" method="post" role="form">
+                    @Html.AntiForgeryToken()
+                    <div class="modal-body">
+                        <p>
+                            Если Вам есть что сказать или вы имеете какую-то идею по улучшению сайта и\или его функциональности, то прошу, не молчите :)
+                            Данная информация будет отправлена программисту. Можно и жалобы писать. Я пожалею.
+                        </p>
+                        <textarea class="form-control" rows="5"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="callbackSubmitBtn">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     <header id="top-nav-bar" class="navbar navbar-default">
         <div class="navbar-header">
             <a class="navbar-brand top-nav-bar-bottommargin top-nav-bar-leftmargin" href="#">
@@ -23,6 +51,13 @@
             </a>
         </div>
         <ul class="nav navbar-nav pull-right top-nav-bar-topmargin" id="top-nav-body">
+            <li>
+                <div class="pull-right top-nav-bar-btn btn-success">
+                    <a role="button" data-toggle="modal" data-target="#callbackModalWindow">
+                        <i class="fa fa-envelope-square fa-2x"></i>
+                    </a>
+                </div>
+            </li>
             <li>
                 <div style="margin-top: 10px">
                     <div class="dropdown">
@@ -104,75 +139,103 @@
                 </a>
             </li>
             <li>
-            @if (User.IsInRole(AccessIdentityRole.Director))
-            {
+                @if (User.IsInRole(AccessIdentityRole.Director))
+                {
                 <li>
                     <a href="@Url.Action("Index", "Olympus")">
                         <i class="fa fa-university"></i>
                         <span>@MainLayout.V_menu_olympus</span>
                     </a>
                 </li>
-            }
-            <li>
-                <a href="@Url.Action("Employees", "Account")">
-                    <i class="fa fa-users fa-2x"></i>
-                    <span>@MainLayout.V_menu_employees</span>
-                </a>
-            </li>
-           @* <li>
-                <a href="@Url.Action("Future", "Home")">
-                    <i class="fa fa-cubes fa-2x"></i>
-                    <span>@MainLayout.V_menu_plans</span>
-                </a>
-            </li>
-            <li>
-                <a href="@Url.Action("About", "Home")">
-                    <i class="fa fa-globe fa-2x"></i>
-                    <span>@MainLayout.V_menu_about</span>
-                </a>
-            </li>*@
-            @if (User.IsInRole(AccessIdentityRole.SubAdmin))
-            {
+                }
                 <li>
-                    <a href="@Url.Action("Register", "Account")">
-                        <i class="fa fa-graduation-cap fa-2x"></i>
-                        <span>@MainLayout.V_menu_add_user</span>
+                    <a href="@Url.Action("Employees", "Account")">
+                        <i class="fa fa-users fa-2x"></i>
+                        <span>@MainLayout.V_menu_employees</span>
                     </a>
                 </li>
-            }
-            @if (User.IsInRole(AccessIdentityRole.Accountant))
-            {
-                <li>
-                    <a href="@Url.Action("AddSell", "Sell")">
-                        <i class="fa fa-database fa-2x"></i>
-                        <span>@MainLayout.V_menu_add_sell</span>
-                    </a>
-                </li>
-            }
-        </ul>
-    </div>
-
-    <div class="content">
-        <div id="pad-wrapper">
-            @RenderBody()
+                @* <li>
+                        <a href="@Url.Action("Future", "Home")">
+                            <i class="fa fa-cubes fa-2x"></i>
+                            <span>@MainLayout.V_menu_plans</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("About", "Home")">
+                            <i class="fa fa-globe fa-2x"></i>
+                            <span>@MainLayout.V_menu_about</span>
+                        </a>
+                    </li>*@
+                @if (User.IsInRole(AccessIdentityRole.SubAdmin))
+                {
+                    <li>
+                        <a href="@Url.Action("Register", "Account")">
+                            <i class="fa fa-graduation-cap fa-2x"></i>
+                            <span>@MainLayout.V_menu_add_user</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(AccessIdentityRole.Accountant))
+                {
+                    <li>
+                        <a href="@Url.Action("AddSell", "Sell")">
+                            <i class="fa fa-database fa-2x"></i>
+                            <span>@MainLayout.V_menu_add_sell</span>
+                        </a>
+                    </li>
+                }
+            </ul>
         </div>
-        <hr />
-    </div>
 
-    <footer id="bottom-nav-bar" class="nav navbar-fixed-bottom">
-        <p>Valentina Kostritskaya</p>
-    </footer>
+        <div class="content">
+            <div id="pad-wrapper">
+                @RenderBody()
+            </div>
+            <hr />
+        </div>
 
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/global")
-    @Scripts.Render("~/bundles/moment")
-    @Scripts.Render("~/bundles/datetimepicker")
-    @Scripts.Render("~/bundles/jsrender")
-    @Scripts.Render("~/bundles/sitetheme")
-    @Scripts.Render("~/bundles/dateformat")
-    @Scripts.Render("~/bundles/bootstrap-table")
-    @RenderSection("scripts", required: false)
-</body>
+        <footer id="bottom-nav-bar" class="nav navbar-fixed-bottom">
+            <p>Valentina Kostritskaya</p>
+        </footer>
+
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/global")
+        @Scripts.Render("~/bundles/moment")
+        @Scripts.Render("~/bundles/datetimepicker")
+        @Scripts.Render("~/bundles/jsrender")
+        @Scripts.Render("~/bundles/sitetheme")
+        @Scripts.Render("~/bundles/dateformat")
+        @Scripts.Render("~/bundles/bootstrap-table")
+        @RenderSection("scripts", required: false)
+
+        <script type="text/javascript">
+            $(function () {
+                $('#callbackModalWindow #callbackSubmitBtn').click(function () {
+                    var textarea = $('#callbackSubmitForm').find('textarea');
+                    var token = $('[name=__RequestVerificationToken]').val();
+                    var headers = {};
+                    headers["__RequestVerificationToken"] = token;
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Callback/SendWish',
+                        data: { 'text': textarea.val() },
+                        headers: headers,
+                        success: function (data) {
+                            textarea.val('');
+                            $('#callbackModalWindow').modal('hide');
+                        },
+                        error: function (data) {
+                            alert('Error while calling SendWish server method');
+                        }
+                    });
+                });
+            });
+        </script>
+
+    </body>
+
+
 </html>

@@ -491,3 +491,19 @@ select option.placeholder {
 .table > tbody > tr > td {
     padding: 5px;
 }
+
+#top-nav-body div.top-nav-bar-btn {
+    margin: 10px 10px 0 0;
+    padding: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#top-nav-body .top-nav-bar-btn a {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.top-nav-bar-btn a i {
+    color: white;
+}
