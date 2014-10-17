@@ -65,5 +65,16 @@ namespace KSEPM.Web.Database
                 return _sellPointRepository;
             }
         }
+
+        private UserCallbackRepository _userCallbackRepository;
+        public UserCallbackRepository UserCallbacks
+        {
+            get
+            {
+                if (_userCallbackRepository == null)
+                    _userCallbackRepository = new UserCallbackRepository(_context);
+                return _userCallbackRepository;
+            }
+        }
     }
 }

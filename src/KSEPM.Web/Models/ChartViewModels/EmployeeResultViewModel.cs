@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using KSEPM.Web.Models.BaseViewModels;
 
 namespace KSEPM.Web.Models.ChartViewModels
 {
-    public class EmployeeResultViewModel
+    public class EmployeeResultViewModel : AmmountBaseViewModel<string>
     {
         public int Position { get; set; }
-        public string Name { get; set; }
         public int ChairCount { get; set; }
-        public double Ammount { get; set; }
-        public double Points { get; set; }
     }
 }

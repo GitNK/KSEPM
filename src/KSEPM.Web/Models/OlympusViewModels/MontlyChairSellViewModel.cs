@@ -6,10 +6,9 @@ using KSEPM.Web.Models.BaseViewModels;
 
 namespace KSEPM.Web.Models.OlympusViewModels
 {
-    public class MontlyChairSellViewModel : NameBaseViewModel<int>
+    public class MontlyChairSellViewModel : AmmountBaseViewModel<int>
     {
         public int Position { get; set; }
         public int Count { get; set; }
-        public double Ammount { get; set; }
     }
 }

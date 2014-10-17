@@ -258,6 +258,7 @@
     <Compile Include="Database\Entities\ReportingBase.cs" />
     <Compile Include="Database\Entities\Sell.cs" />
     <Compile Include="Database\Entities\SellPoint.cs" />
+    <Compile Include="Database\Entities\UserCallback.cs" />
     <Compile Include="Database\IdentityDbInitializer.cs" />
     <Compile Include="Database\Identity\ApplicationUser.cs" />
     <Compile Include="Database\IKSEPMRepository.cs" />
@@ -270,6 +271,7 @@
     <Compile Include="Database\Repositories\BaseRepository.cs" />
     <Compile Include="Database\Repositories\SellPointRepository.cs" />
     <Compile Include="Database\Repositories\SellRepository.cs" />
+    <Compile Include="Database\Repositories\UserCallbackRepository.cs" />
     <Compile Include="DataProcessing\DataAggregator.cs" />
     <Compile Include="DataProcessing\DateProcessor.cs" />
     <Compile Include="DataProcessing\Interfaces\IDataAggregator.cs" />
@@ -289,6 +291,7 @@
     <Compile Include="Infrastructure\Helpers\CultureHelper.cs" />
     <Compile Include="Infrastructure\Helpers\DateTimeHelper.cs" />
     <Compile Include="Infrastructure\Identity\AccessIdentityRole.cs" />
+    <Compile Include="Infrastructure\Identity\GenericPrincipalExtensions.cs" />
     <Compile Include="Infrastructure\Identity\PasswordGenerator.cs" />
     <Compile Include="Infrastructure\Interfaces\IDateFilter.cs" />
     <Compile Include="Infrastructure\TypeMapping\AutoMapperAdapter.cs" />
@@ -324,9 +327,18 @@
     <Compile Include="Migrations\201410021329082_selldaterename.Designer.cs">
       <DependentUpon>201410021329082_selldaterename.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410171202507_usercallback.cs" />
+    <Compile Include="Migrations\201410171202507_usercallback.Designer.cs">
+      <DependentUpon>201410171202507_usercallback.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410171211170_usercallback2.cs" />
+    <Compile Include="Migrations\201410171211170_usercallback2.Designer.cs">
+      <DependentUpon>201410171211170_usercallback2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels\LoginViewModel.cs" />
     <Compile Include="Models\AccountViewModels\RegisterViewModel.cs" />
+    <Compile Include="Models\BaseViewModels\AmmountBaseViewModel.cs" />
     <Compile Include="Models\BaseViewModels\BaseViewModel.cs" />
     <Compile Include="Models\BaseViewModels\NameBaseViewModel.cs" />
     <Compile Include="Models\BaseViewModels\LocalizatedViewModel.cs" />
@@ -411,6 +423,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410021329082_selldaterename.resx">
       <DependentUpon>201410021329082_selldaterename.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410171202507_usercallback.resx">
+      <DependentUpon>201410171202507_usercallback.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410171211170_usercallback2.resx">
+      <DependentUpon>201410171211170_usercallback2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

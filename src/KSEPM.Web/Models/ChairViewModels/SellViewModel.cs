@@ -8,13 +8,11 @@ using KSEPM.Web.Models.BaseViewModels;
 
 namespace KSEPM.Web.Models.ChairViewModels
 {
-    public class SellViewModel : BaseViewModel<int>
+    public class SellViewModel : AmmountBaseViewModel<int>
     {
         public int Position { get; set; }
        // public double Discount { get; set; }
         public long Date { get; set; }
-        public double Ammount { get; set; }
-        public double Points { get; set; }
         public string Achievements { get; set; }
         public ChairViewModel Chair { get; set; }
         public SellerViewModel Seller { get; set; }

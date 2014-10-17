@@ -30,18 +30,11 @@ namespace KSEPM.Web.Database
         public DbSet<ChairLine> ChairLines { get; set; }
         public DbSet<ChairOption> ChairOptions { get; set; }
         public DbSet<SellPoint> SellPoints { get; set; }
+        public DbSet<UserCallback> UserCallbacks { get; set; }
     }
 
     public class KSEPMDbInitializer<T> : CreateDatabaseIfNotExists<KSEPMDbContext>
     {
-        public override void InitializeDatabase(KSEPMDbContext context)
-        {
-            //  context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction
-            //   , string.Format("ALTER DATABASE {0} SET SINGLE_USER WITH ROLLBACK IMMEDIATE", context.Database.Connection.Database));
-
-            base.InitializeDatabase(context);
-        }
-
         protected override void Seed(KSEPMDbContext context)
         {
             IdentityDbInitializer.InitializeDb();

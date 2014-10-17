@@ -9,5 +9,6 @@ namespace KSEPM.Web.Database
         ChairLineRepository ChairLines { get; }
         SellRepository Sells { get; }
         SellPointRepository SellPoints { get; }
+        UserCallbackRepository UserCallbacks { get; }
     }
 }

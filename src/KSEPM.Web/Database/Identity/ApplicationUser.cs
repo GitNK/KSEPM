@@ -18,8 +18,8 @@ namespace KSEPM.Web.Database.Identity
         public bool? IsActive { get; set; }
         public string Description { get; set; }
         public string PointType { get; set; }
-
-        public virtual ICollection<Sell> Sells { get; set; } 
+        public virtual ICollection<Sell> Sells { get; set; }
+        public virtual ICollection<UserCallback> UserCallbacks { get; set; } 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -28,26 +28,6 @@ namespace KSEPM.Web.Database.Identity
             userIdentity.AddClaim(new Claim("FirstName", FirstName));
             // Add custom user claims here
             return userIdentity;
-        }
-    }
-
-    public static class GenericPrincipalExtensions
-    {
-        public static string FirstName(this IPrincipal user)
-        {
-            if (user.Identity.IsAuthenticated)
-            {
-                var claimsIdentity = user.Identity as ClaimsIdentity;
-                if (claimsIdentity == null) 
-                    return "";
-                foreach (var claim in claimsIdentity.Claims)
-                {
-                    if (claim.Type == "FirstName")
-                        return claim.Value;
-                }
-                return "";
-            }
-                return "";
         }
     }
 }

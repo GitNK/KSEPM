@@ -49,6 +49,11 @@ namespace KSEPM.Web.Controllers.BaseControllers
             return appUsers;
         }
 
+        protected ApplicationUser GetCurrentUser()
+        {
+            return UserManager.FindById(User.Identity.GetUserId());
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
