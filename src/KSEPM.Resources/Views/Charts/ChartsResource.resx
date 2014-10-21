@@ -144,6 +144,9 @@
   <data name="V_TC_overall_table_title" xml:space="preserve">
     <value>Рейтинг продавцов</value>
   </data>
+  <data name="V_TC_sellpointranks_title" xml:space="preserve">
+    <value>Рейтинг продаж</value>
+  </data>
   <data name="V_TC_sellpointranks_table_chairlist" xml:space="preserve">
     <value>Список кресел</value>
   </data>
