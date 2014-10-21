@@ -150,9 +150,6 @@
   <data name="V_TC_sellpointranks_table_pointname" xml:space="preserve">
     <value>Sell point</value>
   </data>
-  <data name="V_TC_sellpointranks_title" xml:space="preserve">
-    <value>Sell point rank</value>
-  </data>
   <data name="V_TC_sum_detailtable_title" xml:space="preserve">
     <value>Summarized detailed table</value>
   </data>
