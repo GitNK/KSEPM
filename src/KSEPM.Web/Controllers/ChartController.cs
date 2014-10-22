@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,6 +18,7 @@ using KSEPM.Web.Models.ChairViewModels;
 using KSEPM.Web.Models.ChartViewModels;
 using KSEPM.Web.Models.ChartViewModels.LinearViewModels;
 using KSEPM.Web.Models.ChartViewModels.TablesViewModels;
+using WebGrease;
 
 namespace KSEPM.Web.Controllers
 {
@@ -117,26 +119,52 @@ namespace KSEPM.Web.Controllers
         public JsonResult GetSellPointRanking()
         {
             var sellPointRankList = new List<SellPointRankViewModel>();
+            var sells = _repository.Sells.Get();
 
+            var points = sells.GroupBy(x => x.SellPoint).OrderBy(g=>g.Key.PointName).ToList();
+            
 
-            //Должно выглядеть все примерно так, если расскомитишь и запустишь, то увидишь на таблицах информацию
-            //тут показана одна точка Аракс. Тебе надо их много. Используй _repository , это доступ к базе. Посмотри 
-            //выше в примерах
-            /*
-            sellPointRankList.Add(new SellPointRankViewModel
+            foreach (var point in points)
             {
-                SellPointName = "Arax",
-                SelledChairCount = 20,
-                SelledChairList = new List<string>
+                var ammount=0.0;
+                var scorePoints = 0.0;
+                var _SelledChairList = new List<string>();
+                var chairs = new List<string>();
+              
+                foreach (var sell in sells)
                 {
-                    String.Format("x{0} {1}", 10, "Diamond"),
-                    String.Format("x{0} {1}", 5, "Monarch")
-                },
-                Ammount = 1000,
-                Points = 1000
-            });*/
+                    
+                    if (sell.SellPoint.PointName==point.Key.PointName)
+                    {
+                        ammount = + sell.Amount;
+                        scorePoints = + sell.Points;
+                        chairs.Add(sell.Chair.ChairLine.Name);
+                     }
+                }
 
-            return Json(sellPointRankList, JsonRequestBehavior.AllowGet);
+                var q = from x in chairs
+                    group x by x
+                    into g
+                    let count = g.Count()
+                    orderby count descending
+                    select new {Value = g.Key, Count = count};
+                foreach (var x in q)
+                {
+                    _SelledChairList.Add(String.Format("x{0} {1}", x.Count, x.Value));
+                }
+                
+                sellPointRankList.Add(new SellPointRankViewModel
+                {
+                    SellPointName = GetLocalizatedString(point.Key.PointName),
+                    SelledChairCount = point.Count(),
+                    SelledChairList = _SelledChairList,
+                    Ammount = ammount,
+                    Points = scorePoints
+                });
+            }
+           
+            
+          return Json(sellPointRankList, JsonRequestBehavior.AllowGet);
         }
 
         [Route("LinearCharts")]
